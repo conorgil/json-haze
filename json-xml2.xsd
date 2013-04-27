@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="schemaContainer">
+        <xs:annotation>
+            <xs:documentation> Just the root of the document that declares the outter { and }
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="schema" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="schema">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element ref="string"/>
+                <xs:element ref="number"/>
+                <xs:element ref="integer"/>
+                <xs:element ref="boolean"/>
+                <xs:element ref="object"/>
+                <xs:element ref="array"/>
+                <xs:element ref="null"/>
+                <xs:element ref="any"/>
+                <xs:element ref="unionType"/>
+            </xs:choice>
+            <xs:attributeGroup ref="requiredAttributes"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="object">
+        <xs:annotation>
+            <xs:documentation>NOT YET IMPLEMENTED. Value MUST be an object.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="array">
+        <xs:annotation>
+            <xs:documentation>NOT YET IMPLEMENTED. Value MUST be an array.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="unionType">
+        <xs:annotation>
+            <xs:documentation> NOT YET IMPLEMENTED. An array of two or more simple type definitions.
+                Each item in the array MUST be a simple type definition or a schema. The instance
+                value is valid if it is of the same type as one of the simple type definitions, or
+                valid by one of the schemas, in the array. </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="null">
+        <xs:annotation>
+            <xs:documentation> Value MUST be null. Note this is mainly for purpose of being able use
+                union types to define nullability. If this type is not included in a union, null
+                values are not allowed (the primitives listed above do not allow nulls on their
+                own). </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="any">
+        <xs:annotation>
+            <xs:documentation>Value MAY be of any type including null.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="string">
+        <xs:annotation>
+            <xs:documentation> Value MUST be a string. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="enum" minOccurs="0" maxOccurs="1"/>
+            </xs:all>
+            <xs:attribute name="pattern" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation> This provides a regular expression that a string instance
+                        MUST match in order to be valid. Regular expressions SHOULD follow the
+                        regular expression specification from ECMA 262/Perl 5 </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="minLength" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation> the minimum number of characters in the string
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="maxLength" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation> the maximum number of characters in the string
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="format" type="formatType"/>
+            <xs:attribute name="default" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation> The default value if this field is undefined in the instance
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="number">
+        <xs:annotation>
+            <xs:documentation> Value MUST be a number, floating point numbers are allowed.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="enum" minOccurs="0" maxOccurs="1"/>
+            </xs:all>
+            <xs:attribute name="minimum" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation> the minimum number this field can be </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="exclusiveMinimum" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation> whether minimum is exclusive or not - default: false
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="maximum" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation> the maximum number this field can be </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="exclusiveMaximum" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation> whether maximum is exclusive or not - default: false
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="divisibleBy" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation>This attribute defines what value the number instance must be
+                        divisible by with no remainder (the result of the division must be an
+                        integer.) The value of this attribute SHOULD NOT be 0.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="default" type="xs:double">
+                <xs:annotation>
+                    <xs:documentation> The default value if this field is undefined in the instance
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="integer">
+        <xs:annotation>
+            <xs:documentation> Value MUST be an integer, no floating point numbers are allowed. This
+                is a subset of the number type. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="enum" minOccurs="0" maxOccurs="1"/>
+            </xs:all>
+            <xs:attribute name="minimum" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation> the minimum number this field can be </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="exclusiveMinimum" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation> whether minimum is exclusive or not - default: false
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="maximum" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation> the maximum number this field can be </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="exclusiveMaximum" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation> whether maximum is exclusive or not - default: false
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="divisibleBy" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>This attribute defines what value the number instance must be
+                        divisible by with no remainder (the result of the division must be an
+                        integer.) The value of this attribute SHOULD NOT be 0.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="default" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation> The default value if this field is undefined in the instance
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="boolean">
+        <xs:annotation>
+            <xs:documentation> Value MUST be a boolean. </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+            </xs:all>
+            <xs:attribute name="default" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation> The default value if this field is undefined in the
+                        instance</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="formatType">
+        <xs:annotation>
+            <xs:documentation>This property defines the type of data, content type, or microformat
+                to be expected in the instance property values. A format attribute MAY be one of the
+                values listed below, and if so, SHOULD adhere to the semantics describing for the
+                format. A format SHOULD only be used to give meaning to primitive types (string,
+                integer, number, or boolean). Validators MAY (but are not required to) validate that
+                the instance values conform to a format. The values in this enum are predefined.
+                Conor note: it makes no sense to me to allow this attribute on anything other than a
+                string. So I only support that. Also, since validator implementations are not
+                required to even support enforcing this field, I do not allow custom format values
+                even though the JSON schema spec allows for it. </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="date-time">
+                <xs:annotation>
+                    <xs:documentation>This SHOULD be a date in ISO 8601 format of YYYY-MM-
+                        DDThh:mm:ssZ in UTC time. This is the recommended form of date/ timestamp.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="date">
+                <xs:annotation>
+                    <xs:documentation> This SHOULD be a date in the format of YYYY-MM-DD. It is
+                        recommended that you use the "date-time" format instead of "date" unless you
+                        need to transfer only the date part. </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="time">
+                <xs:annotation>
+                    <xs:documentation>This SHOULD be a time in the format of hh:mm:ss. It is
+                        recommended that you use the "date-time" format instead of "time" unless you
+                        need to transfer only the time part.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="utc-millisec">
+                <xs:annotation>
+                    <xs:documentation>This SHOULD be the difference, measured in milliseconds,
+                        between the specified time and midnight, 00:00 of January 1, 1970 UTC. The
+                        value SHOULD be a number (integer or float).</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="regex">
+                <xs:annotation>
+                    <xs:documentation>A regular expression, following the regular expression
+                        specification from ECMA 262/Perl 5.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="color">
+                <xs:annotation>
+                    <xs:documentation>This is a CSS color (like "#FF0000" or "red"), based on CSS
+                        2.1 [W3C.CR-CSS21-20070719].</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="style">
+                <xs:annotation>
+                    <xs:documentation>This is a CSS style definition (like "color: red; background-
+                        color:#FFF"), based on CSS 2.1 [W3C.CR-CSS21-20070719].</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="phone">
+                <xs:annotation>
+                    <xs:documentation>This SHOULD be a phone number (format MAY follow
+                        E.123).</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="uri">
+                <xs:annotation>
+                    <xs:documentation>This value SHOULD be a URI..</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="email">
+                <xs:annotation>
+                    <xs:documentation>This SHOULD be an email address.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ip-address">
+                <xs:annotation>
+                    <xs:documentation>This SHOULD be an ip version 4 address.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ipv6">
+                <xs:annotation>
+                    <xs:documentation>This SHOULD be an ip version 6 address.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="host-name">
+                <xs:annotation>
+                    <xs:documentation>This SHOULD be a host-name.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:attribute name="title" type="xs:string">
+        <xs:annotation>
+            <xs:documentation>This attribute is a string that provides a short description of the
+                instance property. </xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
+
+    <xs:attribute name="required" type="xs:boolean">
+        <xs:annotation>
+            <xs:documentation>This attribute indicates if the instance must have a value, and not be
+                undefined. This is false by default, making the instance optional.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
+
+    <xs:attribute name="name">
+        <xs:annotation>
+            <xs:documentation> The name of this field. The left hand part of
+                "fieldName":"fieldValue", </xs:documentation>
+        </xs:annotation>
+    </xs:attribute>
+
+    <xs:attributeGroup name="requiredAttributes">
+        <xs:attribute ref="name" use="required"/>
+        <xs:attribute ref="required" use="required"/>
+        <xs:attribute ref="title" use="required"/>
+    </xs:attributeGroup>
+
+    <xs:element name="description" type="xs:string">
+        <xs:annotation>
+            <xs:documentation>String that provides a full description of the of purpose the instance
+                property. </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="enum">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="option" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="1">
+                            <xs:element ref="description"/>
+                        </xs:sequence>
+                        <xs:attribute name="value" type="xs:string"/>
+                        <xs:attribute ref="title"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

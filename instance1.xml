@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemaContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="file:/home/conorgil/virtru/json-xml-schema/json-xml2.xsd">
+ <!--<schema name="fieldOne" required="true" title="short description of fieldOne">
+  <string default="temp"
+   format="color"
+   maxLength="10"
+   minLength="2"
+   pattern="somePattern">
+   <description>
+     full description of this fieldOne
+   </description>
+  </string>
+  
+ </schema>-->
+ <schema name="numberOfPeople" required="true" title="the number of people in the room">
+  <number default="5"
+   divisibleBy="5"
+   exclusiveMaximum="true"
+   exclusiveMinimum="true"
+   maximum="20"
+   minimum="10">
+   <description>
+    complete description of numberOfPeople
+   </description>
+  </number>
+ </schema>
+ 
+</schemaContainer>

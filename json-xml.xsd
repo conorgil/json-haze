@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified">
+    
+    <xs:element name="schema">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="type" minOccurs="0" type="simpleTypeType"/>
+                <xs:element name="properties" minOccurs="0"/>
+                
+            </xs:all>
+            <xs:attribute name="id" type="xs:ID"/>
+            <xs:attribute name="idRef"/>
+            <xs:attribute name="name" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation>
+                        The name of the field for this schema. 
+                        "name": "schema definition"
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:simpleType name="simpleTypeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="string">
+                <xs:annotation>
+                    <xs:documentation>
+                        Value MUST be a string.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="number">
+                <xs:annotation>
+                    <xs:documentation>
+                        Value MUST be a number, floating point numbers are
+                        allowed.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="integer">
+                <xs:annotation>
+                    <xs:documentation>
+                        Value MUST be an integer, no floating point numbers are
+                        allowed.  This is a subset of the number type.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="boolean">
+                <xs:annotation>
+                    <xs:documentation>
+                        Value MUST be a boolean.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="object">
+                <xs:annotation>
+                    <xs:documentation>
+                        Value MUST be an object.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="array">
+                <xs:annotation>
+                    <xs:documentation>
+                        Value MUST be an array.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="null">
+                <xs:annotation>
+                    <xs:documentation>
+                        Value MUST be null.  Note this is mainly for purpose of
+                        being able use union types to define nullability.  If this type
+                        is not included in a union, null values are not allowed (the
+                        primitives listed above do not allow nulls on their own).
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="any">
+                <xs:annotation>
+                    <xs:documentation>
+                        Value MAY be of any type including null.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:element name="properties">
+        <xs:annotation>
+            <xs:documentation>
+                NOT IMPLEMENTED YET
+                
+                This attribute is an object with property definitions that define the
+                valid values of instance object property values.  When the instance
+                value is an object, the property values of the instance object MUST
+                conform to the property definitions in this object.  In this object,
+                each property definition's value MUST be a schema, and the property's
+                name MUST be the name of the instance property that it defines.  The
+                instance property value MUST be valid according to the schema from
+                the property definition.  Properties are considered unordered, the
+                order of the instance properties MAY be in any order.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="patternProperties">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute is an object that defines the schema for a set of
+                property names of an object instance.  The name of each property of
+                this attribute's object is a regular expression pattern in the ECMA
+                262/Perl 5 format, while the value is a schema.  If the pattern
+                matches the name of a property on the instance object, the value of
+                the instance's property MUST be valid against the pattern name's
+                schema value.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="additionalProperties">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute defines a schema for all properties that are not
+                explicitly defined in an object type definition.  If specified, the
+                value MUST be a schema or a boolean.  If false is provided, no
+                additional properties are allowed beyond the properties defined in
+                the schema.  The default value is an empty schema which allows any
+                value for additional properties.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="items">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute defines the allowed items in an instance array, and
+                MUST be a schema or an array of schemas.  The default value is an
+                empty schema which allows any value for items in the instance array.
+                
+                When this attribute value is a schema and the instance value is an
+                array, then all the items in the array MUST be valid according to the
+                schema.
+                
+                When this attribute value is an array of schemas and the instance
+                value is an array, each position in the instance array MUST conform
+                to the schema in the corresponding position for this array.  This
+                called tuple typing.  When tuple typing is used, additional items are
+                allowed, disallowed, or constrained by the "additionalItems"
+                (Section 5.6) attribute using the same rules as
+                "additionalProperties" (Section 5.4) for objects.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="additionalItems">
+        <xs:annotation>
+            <xs:documentation>
+                This provides a definition for additional items in an array instance
+                when tuple definitions of the items is provided.  This can be false
+                to indicate additional items in the array are not allowed, or it can
+                be a schema that defines the schema of the additional items.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="required" type="xs:boolean">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute indicates if the instance must have a value, and not
+                be undefined.  This is false by default, making the instance
+                optional.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="dependencies">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute is an object that defines the requirements of a
+                property on an instance object.  If an object instance has a property
+                with the same name as a property in this attribute's object, then the
+                instance must be valid against the attribute's property value
+                (hereafter referred to as the "dependency value").
+                
+                The dependency value can take one of two forms:
+                
+                Simple Dependency  If the dependency value is a string, then the
+                instance object MUST have a property with the same name as the
+                dependency value.  If the dependency value is an array of strings,
+                then the instance object MUST have a property with the same name
+                as each string in the dependency value's array.
+                
+                Schema Dependency  If the dependency value is a schema, then the
+                instance object MUST be valid against the schema.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>    
+    
+    <xs:element name="minimum" type="xs:float">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute defines the minimum value of the instance property
+                when the type of the instance value is a number.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="maximum" type="xs:float">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute defines the maximum value of the instance property
+                when the type of the instance value is a number.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="exclusiveMinimum" type="xs:boolean">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute indicates if the value of the instance (if the
+                instance is a number) can not equal the number defined by the
+                "minimum" attribute.  This is false by default, meaning the instance
+                value can be greater then or equal to the minimum value.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="exclusiveMaximum" type="xs:boolean">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute indicates if the value of the instance (if the
+                instance is a number) can not equal the number defined by the
+                "maximum" attribute.  This is false by default, meaning the instance
+                value can be less then or equal to the maximum value.                
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="minItems" type="xs:integer">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute defines the minimum number of values in an array when
+                the array is the instance value. Minimum is 0. Default is 0.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="maxItems" type="xs:integer">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute defines the maximum number of values in an array when
+                the array is the instance value.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    <xs:element name="description" type="xs:string">
+        <xs:annotation>
+            <xs:documentation>
+                This attribute is a string that provides a full description of the of
+                purpose the instance property.
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    
+    
+    
+</xs:schema>

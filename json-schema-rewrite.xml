@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ignore>
+    
+    <!--
+        NOTE:
+        - dependencies: skipped over this field entirely
+        
+        - enum: only supports enum of string, number, integer 
+            the spec allows enum of arrays and objects too, but that is hard
+            
+        - format: not sure how most of those values make any sense except for string values. 
+            How can an integer be a color?
+            How can a boolean be an email?
+            JSON spec is stupid... :(
+            I only support format on strings right now because it makes sense
+        
+        - default: can objects/arrays have default values too?
+            currently only supports default on string, number, integer, boolean
+            
+        - disallow: currently unsupported
+        
+        - extends: currently unsupported
+        
+        - $ref: currently unsupported
+        
+        - 
+    -->
+    
+    <schema name="required. the name of the field (the left hand side of 'field': 'value')"
+        required="boolean"
+        title="string - short description of this property">
+        <description>
+            string - full description of this property
+        </description>
+        <type>
+            <simpleType>
+                <string></string>
+                <number></number>
+                <integer></integer>
+                <boolean></boolean>
+                <object></object>
+                <array></array>
+                <null></null>
+                <any></any>
+            </simpleType>
+            OR
+            <unionType>
+                <array>
+                    Two or more:
+                    <simpleType/>
+                    <simpleType/>
+                </array>
+            </unionType>
+        </type>    
+    </schema>
+    
+    
+    <!-- Simple type definitions -->
+    <string required="boolean"
+        pattern="regeEx that the string value must match"
+        minLength="integer - min # of characters in the string value"
+        maxLength="integer - max # of characters in the string value"
+        title="string - short description of this property"
+        format="optional for validators to support. suggested values in spec (can create your own):
+        date-time, date, time, utc-millisec, regex, color, style, phone, uri, email, ip-address, ipv6, host-name"
+        default="the default value if this field is undefined in the instance">
+        <description>
+            string - full description of this property
+        </description>
+        <enum>
+            <!-- restricts the value of this string to the options in this enum -->
+        </enum>
+    </string>
+    
+    
+    <number required="boolean"
+        minimum="float" 
+        exclusiveMinimum="boolean - whether minimum is exclusive or not - default: false"
+        maximum="float"
+        exlusiveMaximum="boolean - whether maximum is exclusive or not - default: false"
+        divisibleBy="This attribute defines what value the number instance must be
+        divisible by with no remainder (the result of the division must be an
+        integer.)  The value of this attribute SHOULD NOT be 0."
+        title="string - short description of this property"
+        default="the default value if this field is undefined in the instance">
+        <description>
+            string - full description of this property
+        </description>
+        <enum>
+            <!-- restricts the value of this number to the options in this enum -->
+        </enum>
+    </number>
+    
+    <integer required="boolean"
+        minimum="integer" 
+        exclusiveMinimum="boolean - whether minimum is exclusive or not - default: false"
+        maximum="integer"
+        exlusiveMaximum="boolean - whether maximum is exclusive or not - default: false"
+        divisibleBy="This attribute defines what value the number instance must be
+        divisible by with no remainder (the result of the division must be an
+        integer.)  The value of this attribute SHOULD NOT be 0."
+        title="string - short description of this property"
+        default="the default value if this field is undefined in the instance">
+        <description>
+            string - full description of this property
+        </description>
+        <enum>
+            <!-- restricts the value of this integer to the options in this enum -->
+        </enum>
+    </integer>
+    
+    <boolean required="boolean"
+        title="string - short description of this property"
+        default="the default value if this field is undefined in the instance">
+        <description>
+            string - full description of this property
+        </description>
+    </boolean>
+    
+    <object required="boolean"
+        title="string - short description of this property">
+        <description>
+            string - full description of this property
+        </description>
+        <properties>
+            <!-- 
+                - defines valid property names for this object to contain
+                - this list is not the only allowed values, as 
+                    patternProperties and additionalProperties can allow more
+                    properties in the instance
+                - each property definition MUST be a schema
+                - properties are unordered
+            -->
+            <property ref="$schema"/>
+            <property ref="$schema"/>
+            
+        </properties>
+        <patternProperties>
+            <!-- restricts the name of allowed properties in this object
+                by providing regular expressions that the property names
+                must match.
+                
+                
+            -->
+            <patternProperty ref="$schema">
+                <!-- should override the schema type to rename @name to @regEx -->
+            </patternProperty>
+        </patternProperties>
+        <additionalProperties>
+            <!-- 
+                - determines if properties not defined in 'properties' or 
+                    'patternProperties' are allowed
+                - must be a schema or a boolean
+                - false means no additional properties are allowed
+                - not really sure what a schema here really means. spec has no examples :( 
+            -->
+            <false/>
+            OR
+            <schema/>
+        </additionalProperties>
+    </object>
+    
+    <array required="boolean"
+        title="string - short description of this property">
+        <description>
+            string - full description of this property
+        </description>
+        <items minItems="integer - the min number of items this array must contain"
+            maxItems="integer - the max number of items this array must contain"
+            uniqueItems="boolean - if true, all items in the array must be unique"
+            >
+            <!--
+              - determines which types of items can go into this array
+            -->
+            <allowAllTypes>
+                <!-- allows any type to go into the array -->  
+            </allowAllTypes>
+            <allowSingleType>
+                <!-- each item in the array must be valid against this schema -->
+                <schema></schema>
+            </allowSingleType>
+            <allowMultipleTypes>
+                <!--
+                    - this is called 'tuple typing'
+                    - each item in the array must be valid against the schema
+                        in the corresponding schema here
+                        eg: array[0] valid against schemas[0],
+                            array[1] valid against schemas[1],
+                            etc
+                -->
+                <schemas>
+                    <schema ref="$schema"/>
+                    <schema ref="$schema"/>
+                    <schema ref="$schema"/>
+                </schemas>
+                <additionalItems>
+                    <!-- determines if additional items are allowed in the array
+                        past the index of the last schema defined
+                        ie, if schemas.length
+                    -->
+                    <false/>
+                    OR
+                    <schema>
+                        <!-- additional items in the array must be valid to this schema -->
+                    </schema>
+                </additionalItems>
+            </allowMultipleTypes>
+        </items>        
+    </array>
+    
+    <enum>
+        <option value="" title="short description of field. Used for documentation only.">
+            <description>
+                Full description of field.
+                Used for documentation only. JSON schema does not support
+                inline documentation of enum values
+            </description>
+        </option>
+    </enum>
+    
+    
+</ignore>
