@@ -22,6 +22,7 @@
         <xsl:call-template name="printSimple">
             <xsl:with-param name="attributes" select="@* except @name"/>
         </xsl:call-template>
+        <xsl:call-template name="comma"/>
         <xsl:apply-templates select="*"/>
         <xsl:call-template name="endObject"/>
     </xsl:template>
@@ -46,11 +47,13 @@
         to match on.
     -->
     <xsl:template match="@*"> 
-        <xsl:text>"</xsl:text>
-        <xsl:value-of select="name(.)"/>
-        <xsl:text>"="</xsl:text>
-        <xsl:value-of select="."/>
-        <xsl:text>"</xsl:text>
+        <xsl:call-template name="printProperty">
+            <xsl:with-param name="property" select="name(.)"/>
+        </xsl:call-template>
+        <xsl:call-template name="seperator"/>
+        <xsl:call-template name="printProperty">
+            <xsl:with-param name="property" select="."/>
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template match="string | number | any">
