@@ -14,6 +14,11 @@
     </xs:element>
 
     <xs:element name="schema">
+        <xs:annotation>
+            <xs:documentation>
+                A JSON schema.
+            </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:choice>
                 <xs:element ref="string"/>
@@ -354,7 +359,7 @@
                         <xs:sequence minOccurs="0" maxOccurs="1">
                             <xs:element ref="description"/>
                         </xs:sequence>
-                        <xs:attribute name="value" type="xs:string"/>
+                        <xs:attribute name="value" type="xs:string" use="required"/>
                         <xs:attribute ref="title"/>
                     </xs:complexType>
                 </xs:element>

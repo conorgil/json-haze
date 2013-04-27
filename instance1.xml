@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemaContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:noNamespaceSchemaLocation="file:./json-xml2.xsd">
+ 
  <!--<schema name="fieldOne" required="true" title="short description of fieldOne">
   <string default="temp"
    format="color"
@@ -13,7 +14,7 @@
   </string>
   
  </schema>-->
- <schema name="numberOfPeople" required="true" title="the number of people in the room">
+ <!--<schema name="numberOfPeople" required="true" title="the number of people in the room">
   <number default="5"
    divisibleBy="5"
    exclusiveMaximum="true"
@@ -23,7 +24,19 @@
    <description>
     complete description of numberOfPeople
    </description>
+   <enum>
+    <option value="valueOne" title="description of token"/>
+   </enum>
   </number>
+ </schema>-->
+ <schema name="numberOfPeople" required="true" title="the number of people in the room">
+  <number default="5"
+   divisibleBy="5"
+   exclusiveMaximum="true"
+   exclusiveMinimum="true"
+   maximum="20"
+   minimum="10"/>
  </schema>
+ 
  
 </schemaContainer>
