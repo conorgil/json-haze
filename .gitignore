@@ -1,2 +1,5 @@
 # eclipse files
 .project
+
+# annoying temp files
+*~
