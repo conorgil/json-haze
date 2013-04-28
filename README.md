@@ -77,6 +77,7 @@ generates the JSON schema:
 wraps them in the outer `{` and `}` in the JSON output.
 * `schema` is a schema with a name. The name of a `schema` is the left hand side
 of a property.
+
 ```javascript
 {
   "schema/@name": {
@@ -85,7 +86,8 @@ of a property.
 }
 ```
 * `anonymousSchema` is the same as `schema`, but does not have a name. In other
-words, it is not assigned to a property. No left hand side. Just 
+words, it is not assigned to a property. No left hand side. Just
+
 ```javascript
 {
   //schema content
