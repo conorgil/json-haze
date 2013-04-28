@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemaContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:noNamespaceSchemaLocation="file:./json-xml2.xsd">
- 
+
  <!--<schema name="fieldOne" required="true" title="short description of fieldOne">
   <string default="temp"
    format="color"
@@ -22,7 +22,7 @@
    <option value="zappy doo"/>
   </enum>
  </schema>
- 
- 
- 
+ <schema name="field2" required="false" title="field 2 is a stupid number">
+  <number/>
+ </schema>
 </schemaContainer>

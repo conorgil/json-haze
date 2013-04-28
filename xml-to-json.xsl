@@ -8,7 +8,13 @@
 
     <xsl:template match="schemaContainer">
         <xsl:call-template name="startObject"/>
-        <xsl:apply-templates/>
+        <xsl:for-each select="schema">
+            <xsl:apply-templates select="current()"/>
+            <xsl:if test="position() != last()">
+                <xsl:call-template name="comma"/>
+                <xsl:call-template name="newline"/>
+            </xsl:if>
+        </xsl:for-each>
         <xsl:call-template name="endObject"/>
     </xsl:template>
 
