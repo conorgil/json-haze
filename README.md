@@ -11,6 +11,22 @@ that provides structure, only lets you use fields where they are appropriate,
 and defines what each field means. Using the XSD with a decent XML editor will
 provide auto-complete and validation functionality as well.
 
+JSON schema v3 defines a large list of 29 attributes, all of which are optional
+and can be used with any other attribute even if that combination does not make
+sense. It is typical for an attribute defintion to restrict when the attribute
+applies by saying "when the instance value is an X, this applies". For example:
+
+```5.10.  maximum
+
+   This attribute defines the maximum value of the instance property
+   when the type of the instance value is a number.```
+
+It doesn't make sense to ever use the maximum attribute when you know your
+instance value is a string. JSON-Haze forces you to select a type for each field
+and only allows the attributes that make sense for that type. This will help
+developers quickly build schemas instead of considering which options are
+valid in the scope of any particular field.
+
 # How to use
 1. Create an XML instance that is valid against `json-haze.xsd`
 2. Apply `bin/xml-to-json.xsl` to the XML instance
@@ -75,6 +91,9 @@ words, it is not assigned to a property. No left hand side. Just
   //schema content
 }
 ```
+
+The XSD contains documentation taken from the JSON schema spec for each element
+to help developers understand how the element functions in a JSON schema.
 
 # Status
 Definitely still in early development.
