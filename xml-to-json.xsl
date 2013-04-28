@@ -16,13 +16,9 @@
     -->
     <xsl:template match="schemaContainer">
         <xsl:call-template name="startObject"/>
-        <xsl:for-each select="schema">
-            <xsl:apply-templates select="current()"/>
-            <xsl:if test="position() != last()">
-                <xsl:call-template name="comma"/>
-                <xsl:call-template name="newline"/>
-            </xsl:if>
-        </xsl:for-each>
+        <xsl:call-template name="printListOfStuff">
+            <xsl:with-param name="listOfStuff" select="*"/>
+        </xsl:call-template>
         <xsl:call-template name="endObject"/>
     </xsl:template>
 
@@ -37,16 +33,18 @@
     -->
     <xsl:template match="schema">
         <xsl:value-of select="util:surroundWithQuotes(@name)"/>
-
         <xsl:call-template name="seperator"/>
         <xsl:call-template name="startObject"/>
         <xsl:call-template name="newline"/>
+        
         <xsl:call-template name="printListOfStuff">
             <xsl:with-param name="listOfStuff" select="@* except @name"/>
         </xsl:call-template>
         <xsl:call-template name="comma"/>
         <xsl:call-template name="newline"/>
-        <xsl:apply-templates select="*"/>
+        <xsl:call-template name="printListOfStuff">
+            <xsl:with-param name="listOfStuff" select="*"/>
+        </xsl:call-template>
         <xsl:call-template name="endObject"/>
     </xsl:template>
 
