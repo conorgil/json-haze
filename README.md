@@ -30,6 +30,11 @@ that provides structure, only lets you use fields where they are appropriate,
 and defines what each field means. Using the XSD with a decent XML editor will
 provide auto-complete and validation functionality as well.
 
+# How to use
+1. Create an XML instance that is valid against json-haze.xsd
+2. Apply xml-to-json.xsl to the XML instance
+3. Happily use your generated JSON schema
+
 # Example
 Simple example XML instance describing two fields:
 ```xml
