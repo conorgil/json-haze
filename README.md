@@ -31,12 +31,12 @@ and defines what each field means. Using the XSD with a decent XML editor will
 provide auto-complete and validation functionality as well.
 
 # How to use
-1. Create an XML instance that is valid against json-haze.xsd
-2. Apply xml-to-json.xsl to the XML instance
+1. Create an XML instance that is valid against `json-haze.xsd`
+2. Apply `bin/xml-to-json.xsl` to the XML instance
 3. Happily use your generated JSON schema
 
 You can apply the XSLT to the XML instance using an XML editor with XSLT support,
-or you can do it on the command line with an XSLT processor, such as
+or a command line XSLT processor, such as
 [Saxon](http://sourceforge.net/projects/saxon/files/Saxon-HE/).
 
 The `bin/` directory contains a simple script that will run the stylesheet
