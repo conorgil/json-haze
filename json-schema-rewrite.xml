@@ -61,12 +61,7 @@
         title="string - short description of this property"
         format="optional for validators to support. suggested values in spec (can create your own):
         date-time, date, time, utc-millisec, regex, color, style, phone, uri, email, ip-address, ipv6, host-name"
-        default="the default value if this field is undefined in the instance">
-        <description>
-            string - full description of this property
-        </description>
-    </string>
-    
+        default="the default value if this field is undefined in the instance"/>
     
     <number
         minimum="float" 
@@ -77,11 +72,7 @@
         divisible by with no remainder (the result of the division must be an
         integer.)  The value of this attribute SHOULD NOT be 0."
         title="string - short description of this property"
-        default="the default value if this field is undefined in the instance">
-        <description>
-            string - full description of this property
-        </description>
-    </number>
+        default="the default value if this field is undefined in the instance"/>
     
     <integer 
         minimum="integer" 
@@ -92,23 +83,12 @@
         divisible by with no remainder (the result of the division must be an
         integer.)  The value of this attribute SHOULD NOT be 0."
         title="string - short description of this property"
-        default="the default value if this field is undefined in the instance">
-        <description>
-            string - full description of this property
-        </description>
-    </integer>
+        default="the default value if this field is undefined in the instance"/>
     
     <boolean 
-        default="the default value if this field is undefined in the instance">
-        <description>
-            string - full description of this property
-        </description>
-    </boolean>
+        default="the default value if this field is undefined in the instance"/>
     
     <object>
-        <description>
-            string - full description of this property
-        </description>
         <properties>
             <!-- 
                 - defines valid property names for this object to contain
