@@ -35,6 +35,18 @@ provide auto-complete and validation functionality as well.
 2. Apply xml-to-json.xsl to the XML instance
 3. Happily use your generated JSON schema
 
+You can apply the XSLT to the XML instance using an XML editor with XSLT support,
+or you can do it on the command line with an XSLT processor, such as
+[Saxon](http://sourceforge.net/projects/saxon/files/Saxon-HE/).
+
+The `bin/` directory contains a simple script that will run the stylesheet
+for you using the bundled Saxon 9.5 jar and run the output through a python
+command to pretty print the JSON.
+
+Put `bin/` on your path and chmod the `haze` script so you can execute it.
+
+`haze <input XML instance filename> <output filename>`
+
 # Example
 Simple example XML instance describing two fields:
 ```xml
