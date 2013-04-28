@@ -54,15 +54,15 @@
         </xs:sequence>
         <xs:attribute name="title" type="xs:string">
             <xs:annotation>
-                <xs:documentation>This attribute is a string that provides a short description of the
-                    instance property. </xs:documentation>
+                <xs:documentation>This attribute is a string that provides a short description of
+                    the instance property. </xs:documentation>
             </xs:annotation>
         </xs:attribute>
-        
+
         <xs:attribute name="required" type="xs:boolean">
             <xs:annotation>
-                <xs:documentation>This attribute indicates if the instance must have a value, and not be
-                    undefined. This is false by default, making the instance optional.
+                <xs:documentation>This attribute indicates if the instance must have a value, and
+                    not be undefined. This is false by default, making the instance optional.
                 </xs:documentation>
             </xs:annotation>
         </xs:attribute>
