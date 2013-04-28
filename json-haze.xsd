@@ -20,7 +20,7 @@
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base="anonymousSchemaType">
-                    <xs:attribute name="name">
+                    <xs:attribute name="name" use="required">
                         <xs:annotation>
                             <xs:documentation> The name of this field. The left hand part of
                                 "fieldName":"fieldValue", </xs:documentation>
