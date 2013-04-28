@@ -37,23 +37,12 @@ mechanisms and preventing the use of other mechanisms:
 
  Notes and questions:
  
-     "fstype": {
-            "enum": [ "ext3", "ext4", "btrfs" ]
-        },
-        
-	is valid and they can only pick from those options. However, what if you had 
-	something like:
-	
-	 "fstype": {
-	 	"type": "string",
-	 	"minLength": "10",
-        "enum": [ "ext3", "ext4", "btrfs" ]
-        },
-        
-     That is still a valid JSON v3 schema, but what does it mean? The value for
-     the field has to be a string with minLength of 10 and none of the options 
-     in the enum satisfy that...???
-     
-     I have decided to treat enum as a first class simple type because the user
-     can just list their values and no other restrictions are necessary. If you don't
-     want them to pick a value, don't put it in the enum.
+* Based on [section 5.19](http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.19)
+ of the JSON v3 schema, enum is a first class simple type. In other words,
+you can do
+    <schema>
+    	<enum>
+    		<option value="value one"/>
+    		<option value="value two"/>
+    	<enum>
+    </schema>
