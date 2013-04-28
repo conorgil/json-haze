@@ -71,7 +71,7 @@
         "maximum":"20",
         "minimum":"10"
     -->
-    <xsl:template match="string | number | any">
+    <xsl:template match="string | number | any | null">
         <!-- print type and comma if there is additional content -->
         <xsl:value-of select="util:printPropertyAndValue('type', name())"/>
         <xsl:if test="count(@* | *) > 0">

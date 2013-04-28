@@ -34,14 +34,15 @@
         </description>
         <type>
             <simpleType>
-                <string></string>
-                <number></number>
-                <integer></integer>
-                <boolean></boolean>
-                <object></object>
-                <array></array>
-                <null></null>
-                <any></any>
+                <string/>
+                <number/>
+                <integer/>
+                <boolean/>
+                <object/>
+                <array/>
+                <enum/>
+                <null/>
+                <any/>
             </simpleType>
             OR
             <unionType>
@@ -67,9 +68,6 @@
         <description>
             string - full description of this property
         </description>
-        <enum>
-            <!-- restricts the value of this string to the options in this enum -->
-        </enum>
     </string>
     
     
@@ -86,9 +84,6 @@
         <description>
             string - full description of this property
         </description>
-        <enum>
-            <!-- restricts the value of this number to the options in this enum -->
-        </enum>
     </number>
     
     <integer required="boolean"
@@ -104,9 +99,6 @@
         <description>
             string - full description of this property
         </description>
-        <enum>
-            <!-- restricts the value of this integer to the options in this enum -->
-        </enum>
     </integer>
     
     <boolean required="boolean"
