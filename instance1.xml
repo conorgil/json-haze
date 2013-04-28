@@ -21,9 +21,6 @@
    exclusiveMinimum="true"
    maximum="20"
    minimum="10">
-   <description>
-    complete description of numberOfPeople
-   </description>
    <enum>
     <option value="valueOne" title="description of token"/>
    </enum>

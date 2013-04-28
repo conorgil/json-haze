@@ -34,3 +34,22 @@ mechanisms and preventing the use of other mechanisms:
     - $ref: currently unsupported
     
     - 
+
+ Notes and questions:
+ 
+     "fstype": {
+            "enum": [ "ext3", "ext4", "btrfs" ]
+        },
+        
+	is valid and they can only pick from those options. However, what if you had 
+	something like:
+	
+	 "fstype": {
+	 	"type": "string",
+	 	"minLength": "10",
+        "enum": [ "ext3", "ext4", "btrfs" ]
+        },
+        
+     That is still a valid JSON v3 schema, but what does it mean? The value for
+     the field has to be a string with minLength of 10 and none of the options 
+     in the enum satisfy that...???
