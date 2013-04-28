@@ -21,18 +21,23 @@
             </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:choice>
-                <xs:element ref="string"/>
-                <xs:element ref="number"/>
-                <xs:element ref="integer"/>
-                <xs:element ref="boolean"/>
-                <xs:element ref="object"/>
-                <xs:element ref="array"/>
-                <xs:element ref="enum"/>
-                <xs:element ref="null"/>
-                <xs:element ref="any"/>
-                <xs:element ref="unionType"/>
-            </xs:choice>
+            <xs:sequence>
+                <xs:sequence>
+                    <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:choice>
+                    <xs:element ref="string"/>
+                    <xs:element ref="number"/>
+                    <xs:element ref="integer"/>
+                    <xs:element ref="boolean"/>
+                    <xs:element ref="object"/>
+                    <xs:element ref="array"/>
+                    <xs:element ref="enum"/>
+                    <xs:element ref="null"/>
+                    <xs:element ref="any"/>
+                    <xs:element ref="unionType"/>
+                </xs:choice>
+            </xs:sequence>
             <xs:attributeGroup ref="requiredAttributes"/>
         </xs:complexType>
     </xs:element>
@@ -78,9 +83,7 @@
             <xs:documentation> Value MUST be a string. </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:all>
-                <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
-            </xs:all>
+            <xs:attribute name="format" type="formatType"/>
             <xs:attribute name="pattern" type="xs:string">
                 <xs:annotation>
                     <xs:documentation> This provides a regular expression that a string instance
@@ -100,7 +103,6 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:attribute>
-            <xs:attribute name="format" type="formatType"/>
             <xs:attribute name="default" type="xs:string">
                 <xs:annotation>
                     <xs:documentation> The default value if this field is undefined in the instance
@@ -116,9 +118,6 @@
             </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:all>
-                <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
-            </xs:all>
             <xs:attribute name="minimum" type="xs:double">
                 <xs:annotation>
                     <xs:documentation> the minimum number this field can be </xs:documentation>
@@ -163,9 +162,6 @@
                 is a subset of the number type. </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:all>
-                <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
-            </xs:all>
             <xs:attribute name="minimum" type="xs:integer">
                 <xs:annotation>
                     <xs:documentation> the minimum number this field can be </xs:documentation>
@@ -209,9 +205,6 @@
             <xs:documentation> Value MUST be a boolean. </xs:documentation>
         </xs:annotation>
         <xs:complexType>
-            <xs:all>
-                <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
-            </xs:all>
             <xs:attribute name="default" type="xs:boolean">
                 <xs:annotation>
                     <xs:documentation> The default value if this field is undefined in the
@@ -355,11 +348,8 @@
             <xs:sequence>
                 <xs:element name="option" minOccurs="1" maxOccurs="unbounded">
                     <xs:complexType>
-                        <xs:sequence minOccurs="0" maxOccurs="1">
-                            <xs:element ref="description"/>
-                        </xs:sequence>
                         <xs:attribute name="value" type="xs:string" use="required"/>
-                        <xs:attribute ref="title"/>
+                        <xs:attribute ref="title" use="optional"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>

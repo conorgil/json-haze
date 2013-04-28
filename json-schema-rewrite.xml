@@ -32,19 +32,16 @@
         <description>
             string - full description of this property
         </description>
-        <type>
-            <simpleType>
-                <string/>
-                <number/>
-                <integer/>
-                <boolean/>
-                <object/>
-                <array/>
-                <enum/>
-                <null/>
-                <any/>
-            </simpleType>
-            OR
+        <oneOf>
+            <string/>
+            <number/>
+            <integer/>
+            <boolean/>
+            <object/>
+            <array/>
+            <enum/>
+            <null/>
+            <any/>
             <unionType>
                 <array>
                     Two or more:
@@ -52,12 +49,12 @@
                     <simpleType/>
                 </array>
             </unionType>
-        </type>    
+        </oneOf>
     </schema>
     
     
     <!-- Simple type definitions -->
-    <string required="boolean"
+    <string 
         pattern="regeEx that the string value must match"
         minLength="integer - min # of characters in the string value"
         maxLength="integer - max # of characters in the string value"
@@ -71,7 +68,7 @@
     </string>
     
     
-    <number required="boolean"
+    <number
         minimum="float" 
         exclusiveMinimum="boolean - whether minimum is exclusive or not - default: false"
         maximum="float"
@@ -86,7 +83,7 @@
         </description>
     </number>
     
-    <integer required="boolean"
+    <integer 
         minimum="integer" 
         exclusiveMinimum="boolean - whether minimum is exclusive or not - default: false"
         maximum="integer"
@@ -101,16 +98,14 @@
         </description>
     </integer>
     
-    <boolean required="boolean"
-        title="string - short description of this property"
+    <boolean 
         default="the default value if this field is undefined in the instance">
         <description>
             string - full description of this property
         </description>
     </boolean>
     
-    <object required="boolean"
-        title="string - short description of this property">
+    <object>
         <description>
             string - full description of this property
         </description>

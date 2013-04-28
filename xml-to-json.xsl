@@ -50,6 +50,10 @@
         <xsl:call-template name="endObject"/>
     </xsl:template>
 
+    
+
+
+
     <!-- 
         Matches simple types and prints its attributes and child values as JSON.
     
@@ -71,7 +75,7 @@
         "maximum":"20",
         "minimum":"10"
     -->
-    <xsl:template match="string | number | any | null">
+    <xsl:template match="string | number | integer | boolean | any | null">
         <!-- print type and comma if there is additional content -->
         <xsl:value-of select="util:printPropertyAndValue('type', name())"/>
         <xsl:if test="count(@* | *) > 0">
