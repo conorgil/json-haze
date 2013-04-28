@@ -49,25 +49,35 @@
         "minimum":"10"
     -->
     <xsl:template match="string | number | any">
+        <!-- print type and comma if there is additional content -->
         <xsl:value-of select="util:printPropertyAndValue('type', name())"/>
-
-        <xsl:if test="count(@* | node()) > 0">
+        <xsl:if test="count(@* | *) > 0">
             <xsl:call-template name="comma"/>
+            <xsl:call-template name="printListOfStuff">
+                <xsl:with-param name="listOfStuff" select="@* | *"/>
+            </xsl:call-template>
         </xsl:if>
 
         <xsl:call-template name="newline"/>
-
-        <xsl:call-template name="printListOfStuff">
-            <xsl:with-param name="listOfStuff" select="@* | node()"/>
-        </xsl:call-template>
     </xsl:template>
 
     <!--
-        changes description element into:
+        changes description into:
         "description": "text()"
     -->
     <xsl:template match="description">
         <xsl:value-of select="util:printPropertyAndValue(name(), text())"/>
+    </xsl:template>
+
+    <!-- prints out enum as a JSON array -->
+    <xsl:template match="enum">
+        <xsl:value-of select="util:surroundWithQuotes(name())"/>
+        <xsl:call-template name="seperator"/>
+        <xsl:call-template name="startArray"/>
+        <xsl:for-each select="option">
+            <xsl:value-of select="util:surroundWithQuotes(current()/@value)"/>
+        </xsl:for-each>
+        <xsl:call-template name="endArray"/>
     </xsl:template>
 
     <!-- UTIL FUNCTIONS -->
@@ -120,7 +130,7 @@
     <xsl:function name="util:surroundWithQuotes">
         <xsl:param name="property"/>
         <xsl:call-template name="startProperty"/>
-        <xsl:value-of select="string($property)"/>
+        <xsl:value-of select="normalize-space(string($property))"/>
         <xsl:call-template name="endProperty"/>
     </xsl:function>
 
