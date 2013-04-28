@@ -119,7 +119,8 @@
                     'patternProperties' are allowed
                 - must be a schema or a boolean
                 - false means no additional properties are allowed
-                - not really sure what a schema here really means. spec has no examples :( 
+                - a schema here means all additional properties must be valid
+                    according to that schema
             -->
             <false/>
             OR
@@ -127,11 +128,7 @@
         </additionalProperties>
     </object>
     
-    <array required="boolean"
-        title="string - short description of this property">
-        <description>
-            string - full description of this property
-        </description>
+    <array title="string - short description of this property">
         <items minItems="integer - the min number of items this array must contain"
             maxItems="integer - the max number of items this array must contain"
             uniqueItems="boolean - if true, all items in the array must be unique"

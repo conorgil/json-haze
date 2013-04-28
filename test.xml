@@ -57,13 +57,90 @@
     </object>
   </schema>
   
-  <!--<schema name="arrayTest" required="false" title="testing array type">
+  <schema name="singleItemTypeArrayTest" required="false" title="testing single item type array">
     <description>
       Using every field in an array to see if they all convert correctly
     </description>
-    <array></array>
-  </schema>-->
-
+    <array maxItems="100" minItems="10" uniqueItems="true">
+      <singleItemType>
+        <anonymousSchema>
+          <string/>
+        </anonymousSchema>
+      </singleItemType>
+    </array>
+  </schema>
+  
+  <schema name="tupleTypeArrayTest" required="false" title="testing tuple type array">
+    <description>
+      Tuple typing array. Does NOT specify additionalItems
+    </description>
+    <array maxItems="100" minItems="10" uniqueItems="true">
+    <tupleTyping>
+      <anonymousSchema>
+        <object>
+          <properties>
+            <schema name="field1" required="true" title="array[0] = this object">
+              <string/>
+            </schema>
+          </properties>
+        </object>
+      </anonymousSchema>
+    </tupleTyping>
+    </array>
+  </schema>
+  
+  <schema name="tupleTypeArrayTest2" required="false" title="testing tuple type array">
+    <description>
+      Tuple typing array. Does specify additionalItems=false
+    </description>
+    <array maxItems="100" minItems="10" uniqueItems="true">
+      <tupleTyping>
+        <anonymousSchema>
+          <object>
+            <properties>
+              <schema name="field1" required="true" title="array[0] = this object">
+                <string/>
+              </schema>
+            </properties>
+          </object>
+        </anonymousSchema>
+        <anonymousSchema>
+          <string/>
+        </anonymousSchema>
+        <additionalItems>
+          <false/>
+        </additionalItems>
+      </tupleTyping>
+    </array>
+  </schema>
+  
+  <schema name="tupleTypeArrayTest3" required="false" title="testing tuple type array">
+    <description>
+      Tuple typing array. Does specify additionalItems=a schema
+    </description>
+    <array maxItems="100" minItems="10" uniqueItems="true">
+      <tupleTyping>
+        <anonymousSchema>
+          <object>
+            <properties>
+              <schema name="field1" required="true" title="array[0] = this object">
+                <string/>
+              </schema>
+            </properties>
+          </object>
+        </anonymousSchema>
+        <anonymousSchema>
+          <string/>
+        </anonymousSchema>
+        <additionalItems>
+          <anonymousSchema>
+            <string/>
+          </anonymousSchema>
+        </additionalItems>
+      </tupleTyping>
+    </array>
+  </schema>
+  
   <schema name="enumTest" required="true" title="testing enum type">
     <description>
       Using every field in an enum to see if they all convert correctly

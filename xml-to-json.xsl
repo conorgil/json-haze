@@ -34,16 +34,18 @@
     <xsl:template match="schema">
         <xsl:value-of select="util:surroundWithQuotes(@name)"/>
         <xsl:call-template name="seperator"/>
+        <xsl:call-template name="anonymousSchemaTemplate"/>
+    </xsl:template>
+
+    <xsl:template match="anonymousSchema">
+        <xsl:call-template name="anonymousSchemaTemplate"/>
+    </xsl:template>
+
+    <xsl:template name="anonymousSchemaTemplate">
         <xsl:call-template name="startObject"/>
         <xsl:call-template name="newline"/>
-        
         <xsl:call-template name="printListOfStuff">
-            <xsl:with-param name="listOfStuff" select="@* except @name"/>
-        </xsl:call-template>
-        <xsl:call-template name="comma"/>
-        <xsl:call-template name="newline"/>
-        <xsl:call-template name="printListOfStuff">
-            <xsl:with-param name="listOfStuff" select="*"/>
+            <xsl:with-param name="listOfStuff" select="@* except @name | *"/>
         </xsl:call-template>
         <xsl:call-template name="endObject"/>
     </xsl:template>
@@ -82,20 +84,47 @@
         <xsl:call-template name="newline"/>
     </xsl:template>
 
-    <xsl:template match="properties | additionalProperties[not(false)] | patternProperties">
+    <xsl:template match="properties | 
+        additionalProperties[not(child::false)] |
+        additionalItems[not(child::false)] |
+        patternProperties |
+        array">
         <xsl:value-of select="util:surroundWithQuotes(name())"/>
         <xsl:call-template name="seperator"/>
         <xsl:call-template name="startObject"/>
         <xsl:call-template name="printListOfStuff">
-            <xsl:with-param name="listOfStuff" select="*"/>
+            <xsl:with-param name="listOfStuff" select="@* | *"/>
         </xsl:call-template>
         <xsl:call-template name="endObject"/>
     </xsl:template>
 
-    <xsl:template match="additionalProperties[false]">
+    <xsl:template match="additionalProperties[child::false] |
+        additionalItems[child::false]">
         <xsl:value-of select="util:surroundWithQuotes(name())"/>
         <xsl:call-template name="seperator"/>
-        <xsl:value-of select="util:surroundWithQuotes('false')"/>
+        <xsl:value-of select="'false'"/>
+    </xsl:template>
+
+    <xsl:template match="singleItemType">
+        <xsl:value-of select="util:surroundWithQuotes('items')"/>
+        <xsl:call-template name="seperator"/>
+        <xsl:call-template name="printListOfStuff">
+            <xsl:with-param name="listOfStuff" select="*"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template match="tupleTyping">
+        <xsl:value-of select="util:surroundWithQuotes('items')"/>
+        <xsl:call-template name="seperator"/>
+        <xsl:call-template name="startArray"/>
+        <xsl:for-each select="*">
+            <xsl:apply-templates select="current()"/>
+            <xsl:if test="position() != last()">
+                <xsl:call-template name="comma"/>
+                <xsl:call-template name="newline"/>
+            </xsl:if>
+        </xsl:for-each>
+        <xsl:call-template name="endArray"/>
     </xsl:template>
 
     <!--
