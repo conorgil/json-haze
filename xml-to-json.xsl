@@ -26,6 +26,15 @@
         <xsl:call-template name="endObject"/>
     </xsl:template>
 
+    <!--
+        prints:
+        "string(@name)": {
+            "required": "true/false",
+            "title": "the short description in title",
+            "other field": "other field value",
+            "last field": "last field value"
+        }
+    -->
     <xsl:template match="schema">
         <xsl:value-of select="util:surroundWithQuotes(@name)"/>
 
