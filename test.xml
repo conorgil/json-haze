@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemaContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="file:./json-xml2.xsd">
+
+  <schema name="stringTest" required="false" title="testing string type">
+    <description>
+      Using every field in a string to see if they all convert correctly.
+    </description>
+    <string default="default string value" format="color" maxLength="2" minLength="1"
+      pattern="some regex"/>
+  </schema>
+
+  <schema name="number" required="true" title="testing number type">
+    <description>
+      Using every field in a number to see if they all convert correctly.
+    </description>
+    <number default="100.0" divisibleBy="2" exclusiveMaximum="false" exclusiveMinimum="true"
+      maximum="900" minimum="2"/>
+  </schema>
+
+  <schema name="integerTest" required="true" title="testing integer type">
+    <description>
+      Using every field in an integer to see if they all convert correctly.
+    </description>
+    <integer default="100" minimum="0" maximum="9" exclusiveMinimum="true" exclusiveMaximum="false"
+      divisibleBy="90"/>
+  </schema>
+
+  <schema name="booleanTest" required="false" title="testing boolean type">
+    <description>
+      Using every field in a boolean to see if they all convert correctly.
+    </description>
+    <boolean default="false"/>
+  </schema>
+  
+  <!--<schema name="objectTest" required="false" title="testing object type">
+    <description>
+      Using every field in an object to see if they all convert correctly
+    </description>
+    <object></object>
+  </schema>-->
+  
+  <!--<schema name="arrayTest" required="false" title="testing array type">
+    <description>
+      Using every field in an array to see if they all convert correctly
+    </description>
+    <array></array>
+  </schema>-->
+
+  <schema name="enumTest" required="true" title="testing enum type">
+    <description>
+      Using every field in an enum to see if they all convert correctly
+    </description>
+    <enum>
+      <option value="optionOne" title="this is the first option"/>
+      <option value="optionTwo" title="this is the second option"/>
+      <option value="foobar" title="got bored with optionX"/>
+      <option value="zappy doo" title="just something silly"/>
+    </enum>
+  </schema>
+
+  <schema name="nullTest" required="true" title="testing null type">
+    <description>
+      Using all of the fields in a null type to see if they all convert correcly
+    </description>
+    <null/>
+  </schema>
+  
+  <schema name="anyTest" required="true" title="testing any type">
+    <description>
+      Using all of the fields in an any type to see if they all convert correctly
+    </description>
+    <any/>
+  </schema>
+</schemaContainer>
