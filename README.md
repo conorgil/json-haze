@@ -14,10 +14,12 @@ and can be used with any other attribute even if that combination does not make
 sense. It is typical for an attribute defintion to restrict when the attribute
 applies by saying "when the instance value is an X, this applies". For example:
 
-```5.10.  maximum
+```
+5.10.  maximum
 
    This attribute defines the maximum value of the instance property
-   when the type of the instance value is a number.```
+   when the type of the instance value is a number.
+```
 
 It doesn't make sense to ever use the maximum attribute when you know your
 instance value is a string. JSON-Haze forces you to select a type for each field
