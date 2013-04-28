@@ -48,10 +48,6 @@
         <xsl:call-template name="endObject"/>
     </xsl:template>
 
-    
-
-
-
     <!-- 
         Matches simple types and prints its attributes and child values as JSON.
     
@@ -73,7 +69,7 @@
         "maximum":"20",
         "minimum":"10"
     -->
-    <xsl:template match="string | number | integer | boolean | any | null">
+    <xsl:template match="string | number | integer | boolean | any | null | object">
         <!-- print type and comma if there is additional content -->
         <xsl:value-of select="util:printPropertyAndValue('type', name())"/>
         <xsl:if test="count(@* | *) > 0">
@@ -84,6 +80,22 @@
         </xsl:if>
 
         <xsl:call-template name="newline"/>
+    </xsl:template>
+
+    <xsl:template match="properties | additionalProperties[not(false)] | patternProperties">
+        <xsl:value-of select="util:surroundWithQuotes(name())"/>
+        <xsl:call-template name="seperator"/>
+        <xsl:call-template name="startObject"/>
+        <xsl:call-template name="printListOfStuff">
+            <xsl:with-param name="listOfStuff" select="*"/>
+        </xsl:call-template>
+        <xsl:call-template name="endObject"/>
+    </xsl:template>
+
+    <xsl:template match="additionalProperties[false]">
+        <xsl:value-of select="util:surroundWithQuotes(name())"/>
+        <xsl:call-template name="seperator"/>
+        <xsl:value-of select="util:surroundWithQuotes('false')"/>
     </xsl:template>
 
     <!--

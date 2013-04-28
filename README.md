@@ -29,7 +29,6 @@ mechanisms and preventing the use of other mechanisms:
 
 * Not currently supported at all
  * unionType
- * objects
  * arrays
  * dependencies
  * disallow

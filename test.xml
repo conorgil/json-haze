@@ -33,12 +33,29 @@
     <boolean default="false"/>
   </schema>
   
-  <!--<schema name="objectTest" required="false" title="testing object type">
+  <schema name="objectTest" required="false" title="testing object type">
     <description>
       Using every field in an object to see if they all convert correctly
     </description>
-    <object></object>
-  </schema>-->
+    <object>
+      <properties>
+        <schema name="allowedFieldOne" required="true" title="desc of this field">
+          <number/>
+        </schema>
+        <schema name="allowedFieldTwo" required="false" title="desc of this other field">
+          <string/>
+        </schema>
+      </properties>
+      <additionalProperties>
+        <false/>
+      </additionalProperties>
+      <patternProperties>
+        <schema name="asdf" required="false" title="desc">
+          <string/>
+        </schema>
+      </patternProperties>
+    </object>
+  </schema>
   
   <!--<schema name="arrayTest" required="false" title="testing array type">
     <description>
