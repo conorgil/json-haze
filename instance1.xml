@@ -1,34 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemaContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="file:./json-xml2.xsd">
-
- <!--<schema name="fieldOne" required="true" title="short description of fieldOne">
-  <string default="temp"
-   format="color"
-   maxLength="10"
-   minLength="2"
-   pattern="somePattern">
-   <description>
-     full description of this fieldOne
-   </description>
-  </string>
-  
- </schema>-->
- <schema name="numberOfPeople" required="true" title="the number of people in the room">
-  <enum>
-   <option value="optionOne"/>
-   <option value="optionTow"/>
-   <option value="foobar"/>
-   <option value="zappy doo"/>
-  </enum>
+ xsi:noNamespaceSchemaLocation="file:./json-haze.xsd">
+ <schema name="fieldOne" required="true">
+   <number/>
  </schema>
- <schema name="field2" required="false" title="field 2 is a stupid number">
-  <number/>
- </schema>
- <schema name="someField" required="true" title="testing type:null">
-   <null/>
- </schema>
- <schema name="anyTest" required="true" title="testing type:any">
-  <null/>
+ <schema name="fieldTwo" required="false">
+   <string/>
  </schema>
 </schemaContainer>
