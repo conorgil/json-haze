@@ -5,9 +5,9 @@ JSON-Haze
 JSON-Haze grew out of my difficulty and frustration switching from a long 
 history of developing XML schemas to developing JSON schemas. I was used to the
 general maturity of XML and associated development tools and specifications.
-For example, programs like oXygen[oxygen], XML Spy[xmlSpy], and the like make
-creating, editing, and documenting XSD schemas a breeze. Specs like XPath[xpath], 
-XSLT[xslt], and Schematron[schematron] make manipulating XML instances and
+For example, programs like [oXygen][], [XML Spy][], and the like make
+creating, editing, and documenting XSD schemas a breeze. Specs like [XPath][], 
+[XSLT][], and [Schematron][] make manipulating XML instances and
 enforcing additional business rules quite straight forward.
 
 I naively expected JSON to have similar mature development tools, but found
@@ -15,10 +15,10 @@ little once I started searching. JSON-Haze is the start of a collection of
 JSON development tools that I wish I had to work with.
 
 [oxygen](http://en.wikipedia.org/wiki/Oxygen_XML_Editor)
-[xmlSpy](http://en.wikipedia.org/wiki/XMLSpy)
-[xpath](http://en.wikipedia.org/wiki/XPath)
-[xslt](http://en.wikipedia.org/wiki/XSLT)
-[schematron](http://en.wikipedia.org/wiki/Schematron)
+[XML Spy](http://en.wikipedia.org/wiki/XMLSpy)
+[XPath](http://en.wikipedia.org/wiki/XPath)
+[XSLT](http://en.wikipedia.org/wiki/XSLT)
+[Schematron](http://en.wikipedia.org/wiki/Schematron)
 
 # JSON-Haze
 
