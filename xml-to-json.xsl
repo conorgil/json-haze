@@ -6,6 +6,14 @@
 
     <xsl:output method="text"/>
 
+    <!--
+        prints:
+        {
+            schema1,
+            schema2,
+            lastSchema
+        }
+    -->
     <xsl:template match="schemaContainer">
         <xsl:call-template name="startObject"/>
         <xsl:for-each select="schema">
