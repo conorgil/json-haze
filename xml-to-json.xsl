@@ -84,9 +84,7 @@
         <xsl:call-template name="newline"/>
     </xsl:template>
 
-    <xsl:template match="properties | 
-        additionalProperties[not(child::false)] |
-        additionalItems[not(child::false)] |
+    <xsl:template match="properties |
         patternProperties |
         array">
         <xsl:value-of select="util:surroundWithQuotes(name())"/>
@@ -96,6 +94,15 @@
             <xsl:with-param name="listOfStuff" select="@* | *"/>
         </xsl:call-template>
         <xsl:call-template name="endObject"/>
+    </xsl:template>
+
+    <xsl:template match="additionalProperties[not(child::false)] |
+        additionalItems[not(child::false)]">
+        <xsl:value-of select="util:surroundWithQuotes(name())"/>
+        <xsl:call-template name="seperator"/>
+        <xsl:call-template name="printListOfStuff">
+            <xsl:with-param name="listOfStuff" select="@* | *"/>
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template match="additionalProperties[child::false] |
@@ -117,7 +124,7 @@
         <xsl:value-of select="util:surroundWithQuotes('items')"/>
         <xsl:call-template name="seperator"/>
         <xsl:call-template name="startArray"/>
-        <xsl:for-each select="*">
+        <xsl:for-each select="anonymousSchema">
             <xsl:apply-templates select="current()"/>
             <xsl:if test="position() != last()">
                 <xsl:call-template name="comma"/>
@@ -125,6 +132,12 @@
             </xsl:if>
         </xsl:for-each>
         <xsl:call-template name="endArray"/>
+        
+        <xsl:if test="child::additionalItems">
+            <xsl:call-template name="comma"/>
+            <xsl:call-template name="newline"/>
+            <xsl:apply-templates select="additionalItems"/>
+        </xsl:if>
     </xsl:template>
 
     <!--
