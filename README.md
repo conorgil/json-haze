@@ -53,3 +53,7 @@ mechanisms and preventing the use of other mechanisms:
      That is still a valid JSON v3 schema, but what does it mean? The value for
      the field has to be a string with minLength of 10 and none of the options 
      in the enum satisfy that...???
+     
+     I have decided to treat enum as a first class simple type because the user
+     can just list their values and no other restrictions are necessary. If you don't
+     want them to pick a value, don't put it in the enum.

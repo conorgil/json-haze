@@ -15,16 +15,12 @@
   
  </schema>-->
  <schema name="numberOfPeople" required="true" title="the number of people in the room">
-  <number default="5"
-   divisibleBy="5"
-   exclusiveMaximum="true"
-   exclusiveMinimum="true"
-   maximum="20"
-   minimum="10">
-   <enum>
-    <option value="valueOne" title="description of token"/>
-   </enum>
-  </number>
+  <enum>
+   <option value="optionOne"/>
+   <option value="optionTow"/>
+   <option value="foobar"/>
+   <option value="zappy doo"/>
+  </enum>
  </schema>
  
  

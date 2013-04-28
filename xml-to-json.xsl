@@ -76,6 +76,9 @@
         <xsl:call-template name="startArray"/>
         <xsl:for-each select="option">
             <xsl:value-of select="util:surroundWithQuotes(current()/@value)"/>
+            <xsl:if test="position() != last()">
+                <xsl:call-template name="comma"/>
+            </xsl:if>
         </xsl:for-each>
         <xsl:call-template name="endArray"/>
     </xsl:template>

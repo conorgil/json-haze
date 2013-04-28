@@ -27,6 +27,7 @@
                 <xs:element ref="boolean"/>
                 <xs:element ref="object"/>
                 <xs:element ref="array"/>
+                <xs:element ref="enum"/>
                 <xs:element ref="null"/>
                 <xs:element ref="any"/>
                 <xs:element ref="unionType"/>
@@ -78,7 +79,6 @@
         <xs:complexType>
             <xs:all>
                 <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="enum" minOccurs="0" maxOccurs="1"/>
             </xs:all>
             <xs:attribute name="pattern" type="xs:string">
                 <xs:annotation>
@@ -117,7 +117,6 @@
         <xs:complexType>
             <xs:all>
                 <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="enum" minOccurs="0" maxOccurs="1"/>
             </xs:all>
             <xs:attribute name="minimum" type="xs:double">
                 <xs:annotation>
@@ -165,7 +164,6 @@
         <xs:complexType>
             <xs:all>
                 <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="enum" minOccurs="0" maxOccurs="1"/>
             </xs:all>
             <xs:attribute name="minimum" type="xs:integer">
                 <xs:annotation>
