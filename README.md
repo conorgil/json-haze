@@ -32,14 +32,13 @@ mechanisms and preventing the use of other mechanisms:
     - extends: currently unsupported
     
     - $ref: currently unsupported
-    
-    - 
 
- Notes and questions:
+Notes and questions:
  
-* Based on [section 5.19](http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.19)
- of the JSON v3 schema, enum is a first class simple type. In other words,
-you can do
+Based on [section 5.19](http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.19)
+ of the JSON v3 schema, enum is a first class simple type. In other words, 
+ you can do
+
 ```xml
 <schema>
 	<enum>
