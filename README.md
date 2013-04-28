@@ -40,9 +40,11 @@ mechanisms and preventing the use of other mechanisms:
 * Based on [section 5.19](http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.19)
  of the JSON v3 schema, enum is a first class simple type. In other words,
 you can do
-    <schema>
-    	<enum>
-    		<option value="value one"/>
-    		<option value="value two"/>
-    	<enum>
-    </schema>
+```xml
+<schema>
+	<enum>
+		<option value="value one"/>
+		<option value="value two"/>
+	<enum>
+</schema>
+```
