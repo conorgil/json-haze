@@ -1,8 +1,6 @@
 JSON-Haze
 ===============
 
-# JSON-Haze
-
 JSON-Haze is basically JSON schema for XML developers. The provided XSD lets 
 developers create XML instances that describe a JSON schema and then generate
 the JSON schema from the XML instance using XSLT. The XSD is an interpretation
