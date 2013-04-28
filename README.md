@@ -14,11 +14,11 @@ I naively expected JSON to have similar mature development tools, but found
 little once I started searching. JSON-Haze is the start of a collection of 
 JSON development tools that I wish I had to work with.
 
-[1](http://en.wikipedia.org/wiki/Oxygen_XML_Editor)
-[2](http://en.wikipedia.org/wiki/XMLSpy)
-[3](http://en.wikipedia.org/wiki/XPath)
-[4](http://en.wikipedia.org/wiki/XSLT)
-[5](http://en.wikipedia.org/wiki/Schematron)
+[1]: (http://en.wikipedia.org/wiki/Oxygen_XML_Editor)
+[2]: (http://en.wikipedia.org/wiki/XMLSpy)
+[3]: (http://en.wikipedia.org/wiki/XPath)
+[4]: (http://en.wikipedia.org/wiki/XSLT)
+[5]: (http://en.wikipedia.org/wiki/Schematron)
 
 # JSON-Haze
 
