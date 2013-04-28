@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemaContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="file:./json-xml2.xsd">
+  xsi:noNamespaceSchemaLocation="file:./json-haze.xsd">
 
   <schema name="stringTest" required="false" title="testing string type">
     <description>
