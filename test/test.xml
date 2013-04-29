@@ -1,170 +1,199 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemaContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="urn:json-haze ../json-haze.xsd"
+  xmlns:js="urn:json-haze"
   xmlns="urn:json-haze">
-
-  <schema name="stringTest" required="false" title="testing string type">
-    <description>
-      Using every field in a string to see if they all convert correctly.
-    </description>
-    <string default="default string value" format="color" maxLength="2" minLength="1"
-      pattern="some regex"/>
-  </schema>
-
-  <schema name="number" required="true" title="testing number type">
-    <description>
-      Using every field in a number to see if they all convert correctly.
-    </description>
-    <number default="100.0" divisibleBy="2" exclusiveMaximum="false" exclusiveMinimum="true"
-      maximum="900" minimum="2"/>
-  </schema>
-
-  <schema name="integerTest" required="true" title="testing integer type">
-    <description>
-      Using every field in an integer to see if they all convert correctly.
-    </description>
-    <integer default="100" minimum="0" maximum="9" exclusiveMinimum="true" exclusiveMaximum="false"
-      divisibleBy="90"/>
-  </schema>
-
-  <schema name="booleanTest" required="false" title="testing boolean type">
-    <description>
-      Using every field in a boolean to see if they all convert correctly.
-    </description>
-    <boolean default="false"/>
-  </schema>
-  
-  <schema name="objectTest" required="false" title="testing object type">
-    <description>
-      Using every field in an object to see if they all convert correctly
-    </description>
-    <object>
-      <properties>
-        <schema name="allowedFieldOne" required="true" title="desc of this field">
-          <number/>
-        </schema>
-        <schema name="allowedFieldTwo" required="false" title="desc of this other field">
-          <string/>
-        </schema>
-      </properties>
-      <additionalProperties>
-        <false/>
-      </additionalProperties>
-      <patternProperties>
-        <schema name="asdf" required="false" title="desc">
-          <string/>
-        </schema>
-      </patternProperties>
-    </object>
-  </schema>
-  
-  <schema name="singleItemTypeArrayTest" required="false" title="testing single item type array">
-    <description>
-      Using every field in an array to see if they all convert correctly
-    </description>
-    <array maxItems="100" minItems="10" uniqueItems="true">
-      <singleItemType>
-        <anonymousSchema>
-          <string/>
-        </anonymousSchema>
-      </singleItemType>
-    </array>
-  </schema>
-  
-  <schema name="tupleTypeArrayTest" required="false" title="testing tuple type array">
-    <description>
-      Tuple typing array. Does NOT specify additionalItems
-    </description>
-    <array maxItems="100" minItems="10" uniqueItems="true">
-    <tupleTyping>
-      <anonymousSchema>
-        <object>
-          <properties>
-            <schema name="field1" required="true" title="array[0] = this object">
-              <string/>
-            </schema>
-          </properties>
-        </object>
-      </anonymousSchema>
-    </tupleTyping>
-    </array>
-  </schema>
-  
-  <schema name="tupleTypeArrayTest2" required="false" title="testing tuple type array">
-    <description>
-      Tuple typing array. Does specify additionalItems=false
-    </description>
-    <array maxItems="100" minItems="10" uniqueItems="true">
-      <tupleTyping>
-        <anonymousSchema>
-          <object>
-            <properties>
-              <schema name="field1" required="true" title="array[0] = this object">
-                <string/>
-              </schema>
-            </properties>
-          </object>
-        </anonymousSchema>
-        <anonymousSchema>
-          <string/>
-        </anonymousSchema>
-        <additionalItems>
-          <false/>
-        </additionalItems>
-      </tupleTyping>
-    </array>
-  </schema>
-  
-  <schema name="tupleTypeArrayTest3" required="false" title="testing tuple type array">
-    <description>
-      Tuple typing array. Does specify additionalItems=a schema
-    </description>
-    <array maxItems="100" minItems="10" uniqueItems="true">
-      <tupleTyping>
-        <anonymousSchema>
-          <object>
-            <properties>
-              <schema name="field1" required="true" title="array[0] = this object">
-                <string/>
-              </schema>
-            </properties>
-          </object>
-        </anonymousSchema>
-        <anonymousSchema>
-          <string/>
-        </anonymousSchema>
-        <additionalItems>
-          <anonymousSchema>
-            <string/>
-          </anonymousSchema>
-        </additionalItems>
-      </tupleTyping>
-    </array>
-  </schema>
-  
-  <schema name="enumTest" required="true" title="testing enum type">
-    <description>
-      Using every field in an enum to see if they all convert correctly
-    </description>
-    <enum>
-      <option value="optionOne" title="this is the first option"/>
-      <option value="optionTwo" title="this is the second option"/>
-      <option value="foobar" title="got bored with optionX"/>
-      <option value="zappy doo" title="just something silly"/>
-    </enum>
-  </schema>
-
-  <schema name="nullTest" required="true" title="testing null type">
-    <description>
-      Using all of the fields in a null type to see if they all convert correcly
-    </description>
-    <null/>
-  </schema>
-  
-  <schema name="anyTest" required="true" title="testing any type">
-    <description>
-      Using all of the fields in an any type to see if they all convert correctly
-    </description>
-    <any/>
-  </schema>
-</schemaContainer>
+	<object>
+		<properties>
+			<js:property name="stringTest">
+				<schema required="false" title="testing string type">
+					<description>
+						Using every field in a string to see if they all convert correctly.
+					</description>
+					<string default="default string value" format="color" maxLength="2" minLength="1"
+						pattern="some regex"/>
+				</schema>
+			</js:property>
+			<property name="numberTest">
+				<schema required="true" title="testing number type">
+					<description>
+						Using every field in a number to see if they all convert correctly.
+					</description>
+					<number default="100.0" divisibleBy="2" exclusiveMaximum="false" exclusiveMinimum="true"
+						maximum="900" minimum="2"/>
+				</schema>
+			</property>
+			<property name="integerTest">
+				<schema required="true" title="testing integer type">
+					<description>
+						Using every field in an integer to see if they all convert correctly.
+					</description>
+					<integer default="100" minimum="0" maximum="9" exclusiveMinimum="true" exclusiveMaximum="false"
+						divisibleBy="90"/>
+				</schema>
+			</property>
+			<property name="booleanTest" >
+				<schema required="false" title="testing boolean type">
+					<description>
+						Using every field in a boolean to see if they all convert correctly.
+					</description>
+					<boolean default="false"/>
+				</schema>
+			</property>
+			<property name="objectTest">
+				<schema required="false" title="testing object type">
+					<description>
+						Using every field in an object to see if they all convert correctly
+					</description>
+					<object>
+						<properties>
+							<property name="allowedFieldOne">
+								<schema required="true" title="desc of this field">
+									<number/>
+								</schema>
+							</property>
+							<property name="allowedFieldTwo">
+								<schema required="false" title="desc of this other field">
+									<string/>
+								</schema>
+							</property>
+						</properties>
+						<additionalProperties>
+							<false/>
+						</additionalProperties>
+						<patternProperties>
+							<property name="asdf">
+								<schema required="false" title="desc">
+									<string/>
+								</schema>
+							</property>
+						</patternProperties>
+					</object>
+				</schema>
+			</property>
+			<property name="singleItemTypeArrayTest">
+				<schema required="false" title="testing single item type array">
+					<description>
+						Using every field in an array to see if they all convert correctly
+					</description>
+					<array maxItems="100" minItems="10" uniqueItems="true">
+						<singleItemType>
+							<schema>
+								<string/>
+							</schema>
+						</singleItemType>
+					</array>
+				</schema>
+			</property>
+			<property name="tupleTypeArrayTest">
+				<schema required="false" title="testing tuple type array">
+					<description>
+						Tuple typing array. Does NOT specify additionalItems
+					</description>
+					<array maxItems="100" minItems="10" uniqueItems="true">
+						<tupleTyping>
+							<schema>
+								<object>
+									<properties>
+										<property name="field1">
+											<schema required="true" title="array[0] = this object">
+												<string/>
+											</schema>
+										</property>
+									</properties>
+								</object>
+							</schema>
+						</tupleTyping>
+					</array>
+				</schema>
+			</property>
+			<property name="tupleTypeArrayTest2">
+				<schema required="false" title="testing tuple type array">
+					<description>
+						Tuple typing array. Does specify additionalItems=false
+					</description>
+					<array maxItems="100" minItems="10" uniqueItems="true">
+						<tupleTyping>
+							<schema>
+								<object>
+									<properties>
+										<property name="someFieldName">
+											<schema>
+												<string/>
+											</schema>
+										</property>
+									</properties>
+								</object>
+							</schema>
+							<schema>
+								<string/>
+							</schema>
+							<additionalItems>
+								<false/>
+							</additionalItems>
+						</tupleTyping>
+					</array>
+				</schema>
+			</property>
+			<property name="tupleTypeArrayTest3">
+				<schema required="false" title="testing tuple type array">
+					<description>
+						Tuple typing array. Does specify additionalItems=a schema
+					</description>
+					<array maxItems="100" minItems="10" uniqueItems="true">
+						<tupleTyping>
+							<schema>
+								<object>
+									<properties>
+										<property name="field1">
+											<schema required="true" title="array[0] = this object">
+												<string/>
+											</schema>
+										</property>
+									</properties>
+								</object>
+							</schema>
+							<schema>
+								<string/>
+							</schema>
+							<additionalItems>
+								<schema>
+									<string/>
+								</schema>
+							</additionalItems>
+						</tupleTyping>
+					</array>
+				</schema>
+			</property>
+			<property name="enumTest">
+				<schema required="true" title="testing enum type">
+					<description>
+						Using every field in an enum to see if they all convert correctly
+					</description>
+					<enum>
+						<option value="optionOne" title="this is the first option"/>
+						<option value="optionTwo" title="this is the second option"/>
+						<option value="foobar" title="got bored with optionX"/>
+						<option value="zappy doo" title="just something silly"/>
+					</enum>
+				</schema>
+			</property>
+			<property name="nullTest">
+				<schema required="true" title="testing null type">
+					<description>
+						Using all of the fields in a null type to see if they all convert correcly
+					</description>
+					<null/>
+				</schema>
+			</property>
+			<property name="anyTest">
+				<schema required="true" title="testing any type">
+					<description>
+						Using all of the fields in an any type to see if they all convert correctly
+					</description>
+					<any/>
+				</schema>
+			</property>
+		</properties>
+	</object>
+</schema>

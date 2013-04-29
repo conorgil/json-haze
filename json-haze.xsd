@@ -1,74 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns="urn:json-haze"
-    targetNamespace="urn:json-haze">
-
-    <xs:element name="schemaContainer">
-        <xs:annotation>
-            <xs:documentation> Container to hold one or more schemas. Declares the outter { and }
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="schema" minOccurs="1" maxOccurs="unbounded"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    targetNamespace="urn:json-haze"
+    elementFormDefault="qualified">
 
     <xs:element name="schema">
         <xs:annotation>
             <xs:documentation> A JSON schema. </xs:documentation>
         </xs:annotation>
-        <xs:complexType>
-            <xs:complexContent>
-                <xs:extension base="anonymousSchemaType">
-                    <xs:attribute name="name" use="required">
-                        <xs:annotation>
-                            <xs:documentation> The name of this field. The left hand part of
-                                "fieldName":"fieldValue", </xs:documentation>
-                        </xs:annotation>
-                    </xs:attribute>
-                </xs:extension>
-            </xs:complexContent>
-        </xs:complexType>
+    	<xs:complexType>
+    		<xs:sequence>
+    			<xs:sequence minOccurs="0" maxOccurs="1">
+    				<xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+    			</xs:sequence>
+
+    			<!-- you CAN have an empty schema, so this choice can occur zero times -->
+    			<xs:choice minOccurs="0" maxOccurs="1">
+    				<xs:element ref="string"/>
+    				<xs:element ref="number"/>
+    				<xs:element ref="integer"/>
+    				<xs:element ref="boolean"/>
+    				<xs:element ref="object"/>
+    				<xs:element ref="array"/>
+    				<xs:element ref="enum"/>
+    				<xs:element ref="null"/>
+    				<xs:element ref="any"/>
+    				<xs:element ref="unionType"/>
+    			</xs:choice>
+    		</xs:sequence>
+    		
+    		<!-- attributes -->
+    		<xs:attribute name="title" type="xs:string">
+    			<xs:annotation>
+    				<xs:documentation>This attribute is a string that provides a short description of
+    					the instance property. </xs:documentation>
+    			</xs:annotation>
+    		</xs:attribute>
+    		
+    		<xs:attribute name="required" type="xs:boolean">
+    			<xs:annotation>
+    				<xs:documentation>This attribute indicates if the instance must have a value, and
+    					not be undefined. This is false by default, making the instance optional.
+    				</xs:documentation>
+    			</xs:annotation>
+    		</xs:attribute>
+    	</xs:complexType>
     </xs:element>
 
-    <xs:element name="anonymousSchema" type="anonymousSchemaType"/>
-
-    <xs:complexType name="anonymousSchemaType">
-        <xs:sequence>
-            <xs:sequence>
-                <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
-            </xs:sequence>
-            <!-- you CAN have an empty schema, so this choice can occur zero times -->
-            <xs:choice minOccurs="0">
-                <xs:element ref="string"/>
-                <xs:element ref="number"/>
-                <xs:element ref="integer"/>
-                <xs:element ref="boolean"/>
-                <xs:element ref="object"/>
-                <xs:element ref="array"/>
-                <xs:element ref="enum"/>
-                <xs:element ref="null"/>
-                <xs:element ref="any"/>
-                <xs:element ref="unionType"/>
-            </xs:choice>
-        </xs:sequence>
-        <xs:attribute name="title" type="xs:string">
-            <xs:annotation>
-                <xs:documentation>This attribute is a string that provides a short description of
-                    the instance property. </xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
-
-        <xs:attribute name="required" type="xs:boolean">
-            <xs:annotation>
-                <xs:documentation>This attribute indicates if the instance must have a value, and
-                    not be undefined. This is false by default, making the instance optional.
-                </xs:documentation>
-            </xs:annotation>
-        </xs:attribute>
-    </xs:complexType>
+	<xs:element name="property">
+		<xs:annotation>
+			<xs:documentation>
+				Defines a JSON property. "property name": JSON schema 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="schema" minOccurs="1" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>
+						The name of this property. IE, the left hand side of
+						"property name": property value
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
 
     <xs:element name="object">
         <xs:annotation>
@@ -86,7 +84,7 @@
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element ref="schema" minOccurs="1" maxOccurs="unbounded"/>
+                            <xs:element ref="property" minOccurs="1" maxOccurs="unbounded"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -102,7 +100,7 @@
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element ref="schema" minOccurs="1" maxOccurs="unbounded"/>
+                            <xs:element ref="property" minOccurs="1" maxOccurs="unbounded"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -124,7 +122,7 @@
     <xs:complexType name="additionalPropertiesType">
         <xs:choice>
             <xs:element name="false"/>
-            <xs:element ref="anonymousSchema"/>
+            <xs:element ref="schema"/>
         </xs:choice>
     </xs:complexType>
 
@@ -142,7 +140,7 @@
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element ref="anonymousSchema"/>
+                            <xs:element ref="schema"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -154,7 +152,7 @@
                     </xs:annotation>
                     <xs:complexType>
                         <xs:all>
-                            <xs:element ref="anonymousSchema" minOccurs="1" maxOccurs="unbounded"/>
+                            <xs:element ref="schema" minOccurs="1" maxOccurs="unbounded"/>
                             <xs:element name="additionalItems" type="additionalPropertiesType"
                                 minOccurs="0">
                                 <xs:annotation>

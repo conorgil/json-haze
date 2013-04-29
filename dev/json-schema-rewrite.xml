@@ -25,6 +25,17 @@
             </unionType>
         </oneOf>
     </schema>
+	
+	
+	<schema>
+		<customProperties>
+			<property name="definitions">
+				<schema>
+					
+				</schema>
+			</property>
+		</customProperties>
+	</schema>
     
     
     <!-- Simple type definitions -->
