@@ -104,16 +104,16 @@ Definitely still in early development.
  * string, integer, number, boolean, object, array
 * Partially supported types/fields
  * enum
-  * currently, only supports enum of string, number, integer. Need to add support
+   * currently, only supports enum of string, number, integer. Need to add support
  for enums of arrays and objects
  * format
-  * currently, only supported for strings. I am not sure how most of
+   * currently, only supported for strings. I am not sure how most of
  those values make any sense except for string values. 
    * How can an integer be a color?
    * How can a boolean be an email?
  * default
-  * currently, only supports default on string, number, integer, boolean
-  * can objects/arrays have default values too? 
+   * currently, only supports default on string, number, integer, boolean
+   * can objects/arrays have default values too? 
 * Not currently supported at all
  * unionType
  * dependencies
@@ -122,25 +122,7 @@ Definitely still in early development.
  * $ref
  * $schema 
 
-Notes and questions:
- 
-Based on [section 5.19](http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.19)
- of the JSON v3 schema, enum is a first class simple type. In other words, 
- you can do
-
-```xml
-<schema>
-	<enum>
-		<option value="value one"/>
-		<option value="value two"/>
-	<enum>
-</schema>
-```
-
 ## TODOs
-* give XSD a namespace
-* create tiny command line tool for compiling the XML into JSON schema
-* command line tool can fix the formatting? JSLint?
 * create stylesheet to generate documentation!!
 * rename schema to namedSchema? Will this make anonymousSchema clearer?
 * schemaContainer likely needs to have anonymousSchemas as children
