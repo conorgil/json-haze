@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemaContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="file:./json-haze.xsd">
+  xsi:schemaLocation="urn:json-haze ../json-haze.xsd"
+  xmlns="urn:json-haze">
  <schema name="fieldOne" required="true">
    <number/>
  </schema>

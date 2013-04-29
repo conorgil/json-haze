@@ -2,7 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="xs" version="2.0"
-    xmlns:util="urn:json-haze:util">
+    xmlns:util="urn:json-haze:util"
+    xmlns:js="urn:json-haze">
 
     <xsl:output method="text"/>
 
@@ -14,7 +15,7 @@
             lastSchema
         }
     -->
-    <xsl:template match="schemaContainer">
+    <xsl:template match="js:schemaContainer">
         <xsl:call-template name="startObject"/>
         <xsl:call-template name="printListOfStuff">
             <xsl:with-param name="listOfStuff" select="*"/>
@@ -31,13 +32,13 @@
             "last field": "last field value"
         }
     -->
-    <xsl:template match="schema">
+    <xsl:template match="js:schema">
         <xsl:value-of select="util:surroundWithQuotes(@name)"/>
         <xsl:call-template name="seperator"/>
         <xsl:call-template name="anonymousSchemaTemplate"/>
     </xsl:template>
 
-    <xsl:template match="anonymousSchema">
+    <xsl:template match="js:anonymousSchema">
         <xsl:call-template name="anonymousSchemaTemplate"/>
     </xsl:template>
 
@@ -45,7 +46,7 @@
         <xsl:call-template name="startObject"/>
         <xsl:call-template name="newline"/>
         <xsl:call-template name="printListOfStuff">
-            <xsl:with-param name="listOfStuff" select="@* except @name | *"/>
+            <xsl:with-param name="listOfStuff" select="@js:* except @js:name | *"/>
         </xsl:call-template>
         <xsl:call-template name="endObject"/>
     </xsl:template>
@@ -71,10 +72,16 @@
         "maximum":"20",
         "minimum":"10"
     -->
-    <xsl:template match="string | number | integer | boolean | any | null | object">
+    <xsl:template match="js:string | 
+        js:number | 
+        js:integer | 
+        js:boolean | 
+        js:any | 
+        js:null | 
+        js:object">
         <!-- print type and comma if there is additional content -->
         <xsl:value-of select="util:printPropertyAndValue('type', name())"/>
-        <xsl:if test="count(@* | *) > 0">
+        <xsl:if test="count(@js:* | js:*) > 0">
             <xsl:call-template name="comma"/>
             <xsl:call-template name="printListOfStuff">
                 <xsl:with-param name="listOfStuff" select="@* | *"/>
@@ -84,20 +91,20 @@
         <xsl:call-template name="newline"/>
     </xsl:template>
 
-    <xsl:template match="properties |
-        patternProperties |
-        array">
+    <xsl:template match="js:properties |
+        js:patternProperties |
+        js:array">
         <xsl:value-of select="util:surroundWithQuotes(name())"/>
         <xsl:call-template name="seperator"/>
         <xsl:call-template name="startObject"/>
         <xsl:call-template name="printListOfStuff">
-            <xsl:with-param name="listOfStuff" select="@* | *"/>
+            <xsl:with-param name="listOfStuff" select="@js:* | js:*"/>
         </xsl:call-template>
         <xsl:call-template name="endObject"/>
     </xsl:template>
 
-    <xsl:template match="additionalProperties[not(child::false)] |
-        additionalItems[not(child::false)]">
+    <xsl:template match="js:additionalProperties[not(child::js:false)] |
+        js:additionalItems[not(child::js:false)]">
         <xsl:value-of select="util:surroundWithQuotes(name())"/>
         <xsl:call-template name="seperator"/>
         <xsl:call-template name="printListOfStuff">
@@ -105,14 +112,14 @@
         </xsl:call-template>
     </xsl:template>
 
-    <xsl:template match="additionalProperties[child::false] |
-        additionalItems[child::false]">
+    <xsl:template match="js:additionalProperties[child::js:false] |
+        js:additionalItems[child::js:false]">
         <xsl:value-of select="util:surroundWithQuotes(name())"/>
         <xsl:call-template name="seperator"/>
         <xsl:value-of select="'false'"/>
     </xsl:template>
 
-    <xsl:template match="singleItemType">
+    <xsl:template match="js:singleItemType">
         <xsl:value-of select="util:surroundWithQuotes('items')"/>
         <xsl:call-template name="seperator"/>
         <xsl:call-template name="printListOfStuff">
@@ -120,11 +127,11 @@
         </xsl:call-template>
     </xsl:template>
 
-    <xsl:template match="tupleTyping">
+    <xsl:template match="js:tupleTyping">
         <xsl:value-of select="util:surroundWithQuotes('items')"/>
         <xsl:call-template name="seperator"/>
         <xsl:call-template name="startArray"/>
-        <xsl:for-each select="anonymousSchema">
+        <xsl:for-each select="js:anonymousSchema">
             <xsl:apply-templates select="current()"/>
             <xsl:if test="position() != last()">
                 <xsl:call-template name="comma"/>
@@ -133,10 +140,10 @@
         </xsl:for-each>
         <xsl:call-template name="endArray"/>
         
-        <xsl:if test="child::additionalItems">
+        <xsl:if test="child::js:additionalItems">
             <xsl:call-template name="comma"/>
             <xsl:call-template name="newline"/>
-            <xsl:apply-templates select="additionalItems"/>
+            <xsl:apply-templates select="js:additionalItems"/>
         </xsl:if>
     </xsl:template>
 
@@ -144,16 +151,16 @@
         changes description into:
         "description": "text()"
     -->
-    <xsl:template match="description">
+    <xsl:template match="js:description">
         <xsl:value-of select="util:printPropertyAndValue(name(), text())"/>
     </xsl:template>
 
     <!-- prints out enum as a JSON array -->
-    <xsl:template match="enum">
+    <xsl:template match="js:enum">
         <xsl:value-of select="util:surroundWithQuotes(name())"/>
         <xsl:call-template name="seperator"/>
         <xsl:call-template name="startArray"/>
-        <xsl:for-each select="option">
+        <xsl:for-each select="js:option">
             <xsl:value-of select="util:surroundWithQuotes(current()/@value)"/>
             <xsl:if test="position() != last()">
                 <xsl:call-template name="comma"/>
