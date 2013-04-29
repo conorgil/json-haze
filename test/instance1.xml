@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemaContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="urn:json-haze ../json-haze.xsd"
-  xmlns="urn:json-haze">
- <schema name="fieldOne" required="true">
-   <number/>
- </schema>
- <schema name="fieldTwo" required="false">
-   <string/>
- </schema>
-</schemaContainer>
+<schema 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:json-haze ../json-haze.xsd"
+	xmlns="urn:json-haze">
+	<object>
+		<properties>
+			<property name="fieldOne">
+				<schema required="true">
+					<number minimum="0" maximum="100"/>
+				</schema>
+			</property>
+			<property name="fieldTwo">
+				<schema>
+					<string minLength="5" maxLength="10"/>
+				</schema>
+			</property>
+		</properties>
+		<additionalProperties>
+			<false/>
+		</additionalProperties>
+	</object>
+</schema>

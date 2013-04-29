@@ -64,7 +64,8 @@
 	<xsl:template
 		match="js:additionalProperties[child::js:false] |
         js:additionalItems[child::js:false]">
-		<xsl:value-of select="util:printPropertyNameAndValue(name(), 'false')"/>
+		<xsl:value-of select="util:printPropertyName(name())"/>
+		<xsl:value-of select="'false'"/>
 	</xsl:template>
 
 	<xsl:template match="js:singleItemType">
