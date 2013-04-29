@@ -47,46 +47,50 @@ Put `bin/` on your path and chmod the `haze` script so you can execute it.
 # Example
 Simple example XML instance describing two fields:
 ```xml
-<schemaContainer>
- <schema name="fieldOne" required="true">
-   <number/>
- </schema>
- <schema name="fieldTwo" required="false">
-   <string/>
- </schema>
-</schemaContainer>
+<schema xmlns="urn:json-haze">
+	<object>
+		<properties>
+			<property name="fieldOne">
+				<schema required="true">
+					<number minimum="0" maximum="100"/>
+				</schema>
+			</property>
+			<property name="fieldTwo">
+				<schema>
+					<string minLength="5" maxLength="10"/>
+				</schema>
+			</property>
+		</properties>
+		<additionalProperties>
+			<false/>
+		</additionalProperties>
+	</object>
+</schema>
 ```
 
 generates the JSON schema:
 
 ```javascript
 {
-    "fieldOne": {
-        "required": "true",
-        "type": "number"
+    "type": "object",
+    "properties": {
+        "fieldOne": {
+            "type": "number",
+            "minimum": "0",
+            "maximum": "100"
+        },
+        "fieldTwo": {
+            "type": "string",
+            "minLength": "5",
+            "maxLength": "10"
+        }
     },
-    "fieldTwo": {
-        "required": "false",
-        "type": "string"
-    }
+    "additionalProperties": false
 }
 ```
 
 # Brief explanations/definitions
-* `schemaContainer` is the root element. It basically holds one or more schemas and
-wraps them in the outer `{` and `}` in the JSON output.
-* `schema` is a schema with a name. The name of a `schema` is the left hand side
-of a property.
-
-```javascript
-{
-  "schema/@name": {
-    //schema content
-  }
-}
-```
-* `anonymousSchema` is the same as `schema`, but does not have a name. In other
-words, it is not assigned to a property. No left hand side. Just
+* `<schema>` represents a JSON schema:
 
 ```javascript
 {
@@ -94,36 +98,43 @@ words, it is not assigned to a property. No left hand side. Just
 }
 ```
 
+* `<property name="fieldName">` respresents the left hand side of a JSON property:
+
+```javascript
+{
+  "fieldName": a JSON schema definition
+}
+```
+
 The XSD contains documentation taken from the JSON schema spec for each element
 to help developers understand how the element functions in a JSON schema.
 
 # Status
-Definitely still in early development.
+Still in early development.
 
 * Fully supported types
  * string, integer, number, boolean, object, array
 * Partially supported types/fields
  * enum
-   * currently, only supports enum of string, number, integer. Need to add support
+      * currently, only supports enum of string, number, integer. Need to add support
  for enums of arrays and objects
  * format
-   * currently, only supported for strings. I am not sure how most of
+     * currently, only supported for strings. I am not sure how most of
  those values make any sense except for string values. 
-   * How can an integer be a color?
-   * How can a boolean be an email?
+     * How can an integer be a color?
+     * How can a boolean be an email?
  * default
-   * currently, only supports default on string, number, integer, boolean
-   * can objects/arrays have default values too? 
+     * currently, only supports default on string, number, integer, boolean
+     * can objects/arrays have default values too? 
 * Not currently supported at all
- * unionType
- * dependencies
- * disallow
- * extends
- * $ref
- * $schema 
+    * unionType
+    * dependencies
+    * disallow
+    * extends
+    * $ref
+    * $schema 
 
 ## TODOs
 * create stylesheet to generate documentation!!
-* rename schema to namedSchema? Will this make anonymousSchema clearer?
-* schemaContainer likely needs to have anonymousSchemas as children
-so people can have a place to define common schemas for using with $ref
+* schema likely needs to allow customProperties as children
+so people can have a place to define common schemas for using with $ref (schema v4 specifically defines 'definitions' for this purpose)
