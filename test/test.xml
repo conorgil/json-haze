@@ -92,17 +92,19 @@
 					</description>
 					<array maxItems="100" minItems="10" uniqueItems="true">
 						<tupleTyping>
-							<schema>
-								<object>
-									<properties>
-										<property name="field1">
-											<schema required="true" title="array[0] = this object">
-												<string/>
-											</schema>
-										</property>
-									</properties>
-								</object>
-							</schema>
+							<schemaArray>
+								<schema>
+									<object>
+										<properties>
+											<property name="field1">
+												<schema required="true" title="array[0] = this object">
+													<string/>
+												</schema>
+											</property>
+										</properties>
+									</object>
+								</schema>
+							</schemaArray>
 						</tupleTyping>
 					</array>
 				</schema>
@@ -114,20 +116,22 @@
 					</description>
 					<array maxItems="100" minItems="10" uniqueItems="true">
 						<tupleTyping>
-							<schema>
-								<object>
-									<properties>
-										<property name="someFieldName">
-											<schema>
-												<string/>
-											</schema>
-										</property>
-									</properties>
-								</object>
-							</schema>
-							<schema>
-								<string/>
-							</schema>
+							<schemaArray>
+								<schema>
+									<object>
+										<properties>
+											<property name="someFieldName">
+												<schema>
+													<string/>
+												</schema>
+											</property>
+										</properties>
+									</object>
+								</schema>
+								<schema>
+									<string/>
+								</schema>
+							</schemaArray>
 							<additionalItems>
 								<false/>
 							</additionalItems>
@@ -142,20 +146,22 @@
 					</description>
 					<array maxItems="100" minItems="10" uniqueItems="true">
 						<tupleTyping>
-							<schema>
-								<object>
-									<properties>
-										<property name="field1">
-											<schema required="true" title="array[0] = this object">
-												<string/>
-											</schema>
-										</property>
-									</properties>
-								</object>
-							</schema>
-							<schema>
-								<string/>
-							</schema>
+							<schemaArray>
+								<schema>
+									<object>
+										<properties>
+											<property name="field1">
+												<schema required="true" title="array[0] = this object">
+													<string/>
+												</schema>
+											</property>
+										</properties>
+									</object>	
+								</schema>
+								<schema>
+									<string/>
+								</schema>
+							</schemaArray>
 							<additionalItems>
 								<schema>
 									<string/>

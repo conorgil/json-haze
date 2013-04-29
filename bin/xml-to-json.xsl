@@ -93,6 +93,10 @@
 		</xsl:if>
 	</xsl:template>
 
+	<xsl:template match="js:schemaArray">
+		<xsl:call-template name="printAttrAndChildContent"/>
+	</xsl:template>
+
 	<!-- prints:
 			"enum": [option1, option2, option3, etc]
 	-->
@@ -107,6 +111,14 @@
 		</xsl:for-each>
 		<xsl:call-template name="endArray"/>
 	</xsl:template>
+
+	<!--
+		applies-templates to the contents of the referenced file
+	-->
+	<xsl:template match="js:reference">
+		<xsl:apply-templates select="document(@ref)/js:schema"/>
+	</xsl:template>
+
 
 	<!-- UTIL FUNCTIONS -->
 

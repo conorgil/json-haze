@@ -109,6 +109,14 @@ generates the JSON schema:
 The XSD contains documentation taken from the JSON schema spec for each element
 to help developers understand how the element functions in a JSON schema.
 
+
+You can reference a `<schema>` defined in another file by using 
+```javascript
+{
+  <schemaReference ref="relative/path/to/file"/>
+}
+```
+
 # Status
 Still in early development.
 
@@ -136,5 +144,6 @@ Still in early development.
 
 ## TODOs
 * create stylesheet to generate documentation!!
-* schema likely needs to allow customProperties as children
 so people can have a place to define common schemas for using with $ref (schema v4 specifically defines 'definitions' for this purpose)
+`* schema likely needs to allow customProperties as children
+

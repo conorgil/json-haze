@@ -47,6 +47,17 @@
     	</xs:complexType>
     </xs:element>
 
+	<xs:element name="schemaReference">
+		<xs:annotation>
+			<xs:documentation>
+				Allows you to reference another file containing a &lt;schema&gt;
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="ref" use="required" type="xs:anyURI"/>
+		</xs:complexType>
+	</xs:element>
+
 	<xs:element name="property">
 		<xs:annotation>
 			<xs:documentation>
@@ -54,9 +65,10 @@
 			</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="schema" minOccurs="1" maxOccurs="1"/>
-			</xs:sequence>
+			<xs:choice><!-- choice between an inline schema or a file reference -->
+				<xs:element ref="schemaReference"/>
+				<xs:element ref="schema"/>
+			</xs:choice>
 			<xs:attribute name="name" type="xs:string" use="required">
 				<xs:annotation>
 					<xs:documentation>
@@ -122,7 +134,10 @@
     <xs:complexType name="additionalPropertiesType">
         <xs:choice>
             <xs:element name="false"/>
-            <xs:element ref="schema"/>
+        	<xs:choice><!-- choice between an inline schema or a file reference -->
+        		<xs:element ref="schemaReference"/>
+        		<xs:element ref="schema"/>
+        	</xs:choice>
         </xs:choice>
     </xs:complexType>
 
@@ -140,7 +155,10 @@
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element ref="schema"/>
+                        	<xs:choice><!-- choice between an inline schema or a file reference -->
+                        		<xs:element ref="schemaReference"/>
+                        		<xs:element ref="schema"/>
+                        	</xs:choice>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -151,20 +169,28 @@
                             against schemas[1], etc </xs:documentation>
                     </xs:annotation>
                     <xs:complexType>
-                        <xs:all>
-                            <xs:element ref="schema" minOccurs="1" maxOccurs="unbounded"/>
-                            <xs:element name="additionalItems" type="additionalPropertiesType"
-                                minOccurs="0">
-                                <xs:annotation>
-                                    <xs:documentation> This provides a definition for additional
-                                        items in an array instance when tuple definitions of the
-                                        items is provided. This can be false to indicate additional
-                                        items in the array are not allowed, or it can be a schema
-                                        that defines the schema of the additional items.
-                                    </xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                        </xs:all>
+                        <xs:sequence>
+                        	<xs:element name="schemaArray">
+                        		<xs:complexType>
+                        			<xs:choice minOccurs="1" maxOccurs="unbounded">
+                        				<!-- choice between an inline schema or a file reference -->
+                        				<xs:element ref="schemaReference"/>
+                        				<xs:element ref="schema"/>
+                        			</xs:choice>
+                        		</xs:complexType>
+                        	</xs:element>
+                          <xs:element name="additionalItems" type="additionalPropertiesType"
+                              minOccurs="0">
+                              <xs:annotation>
+                                  <xs:documentation> This provides a definition for additional
+                                      items in an array instance when tuple definitions of the
+                                      items is provided. This can be false to indicate additional
+                                      items in the array are not allowed, or it can be a schema
+                                      that defines the schema of the additional items.
+                                  </xs:documentation>
+                              </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
                     </xs:complexType>
                 </xs:element>
             </xs:choice>

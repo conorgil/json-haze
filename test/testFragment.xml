@@ -5,22 +5,11 @@
 	xmlns="urn:json-haze">
 	<object>
 		<properties>
-			<property name="fieldOne">
+			<property name="SUCCESS!!">
 				<schema required="true">
 					<number minimum="0" maximum="100"/>
 				</schema>
 			</property>
-			<property name="fieldTwo">
-				<schema>
-					<string minLength="5" maxLength="10"/>
-				</schema>
-			</property>
-			<property name="testReference">
-					<schemaReference ref="./testFragment.xml"/>
-			</property>
 		</properties>
-		<additionalProperties>
-			<false/>
-		</additionalProperties>
 	</object>
 </schema>
