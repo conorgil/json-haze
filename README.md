@@ -143,3 +143,5 @@ Based on [section 5.19](http://tools.ietf.org/html/draft-zyp-json-schema-03#sect
 * command line tool can fix the formatting? JSLint?
 * create stylesheet to generate documentation!!
 * rename schema to namedSchema? Will this make anonymousSchema clearer?
+* schemaContainer likely needs to have anonymousSchemas as children
+so people can have a place to define common schemas for using with $ref
