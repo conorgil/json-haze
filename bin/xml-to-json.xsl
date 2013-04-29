@@ -44,7 +44,6 @@
 
     <xsl:template name="anonymousSchemaTemplate">
         <xsl:call-template name="startObject"/>
-        <xsl:call-template name="newline"/>
         <xsl:call-template name="printListOfStuff">
             <xsl:with-param name="listOfStuff" select="@js:* except @js:name | *"/>
         </xsl:call-template>
@@ -87,8 +86,6 @@
                 <xsl:with-param name="listOfStuff" select="@* | *"/>
             </xsl:call-template>
         </xsl:if>
-
-        <xsl:call-template name="newline"/>
     </xsl:template>
 
     <xsl:template match="js:properties |
@@ -135,14 +132,12 @@
             <xsl:apply-templates select="current()"/>
             <xsl:if test="position() != last()">
                 <xsl:call-template name="comma"/>
-                <xsl:call-template name="newline"/>
             </xsl:if>
         </xsl:for-each>
         <xsl:call-template name="endArray"/>
         
         <xsl:if test="child::js:additionalItems">
             <xsl:call-template name="comma"/>
-            <xsl:call-template name="newline"/>
             <xsl:apply-templates select="js:additionalItems"/>
         </xsl:if>
     </xsl:template>
@@ -173,7 +168,6 @@
 
     <!-- 
         given a list of stuff, calls applyTemplates on each thing, 
-        prints a newline, 
         and prints a comma unless its the last thing in the list -->
     <xsl:template name="printListOfStuff">
         <xsl:param name="listOfStuff" as="node()+"/>
@@ -181,7 +175,6 @@
             <xsl:apply-templates select="current()"/>
             <xsl:if test="position() != last()">
                 <xsl:call-template name="comma"/>
-                <xsl:call-template name="newline"/>
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
@@ -255,9 +248,5 @@
 
     <xsl:template name="comma">
         <xsl:text>,</xsl:text>
-    </xsl:template>
-
-    <xsl:template name="newline">
-        <xsl:text>&#xa;</xsl:text>
     </xsl:template>
 </xsl:stylesheet>
