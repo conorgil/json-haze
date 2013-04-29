@@ -1,31 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ignore>
-    
-    <!--
-        NOTE:
-        - dependencies: skipped over this field entirely
-        
-        - enum: only supports enum of string, number, integer 
-            the spec allows enum of arrays and objects too, but that is hard
-            
-        - format: not sure how most of those values make any sense except for string values. 
-            How can an integer be a color?
-            How can a boolean be an email?
-            JSON spec is stupid... :(
-            I only support format on strings right now because it makes sense
-        
-        - default: can objects/arrays have default values too?
-            currently only supports default on string, number, integer, boolean
-            
-        - disallow: currently unsupported
-        
-        - extends: currently unsupported
-        
-        - $ref: currently unsupported
-        
-        - 
-    -->
-    
     <schema name="required. the name of the field (the left hand side of 'field': 'value')"
         required="boolean"
         title="string - short description of this property">
