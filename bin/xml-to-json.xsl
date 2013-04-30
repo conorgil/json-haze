@@ -115,12 +115,12 @@
 	<!--
 		applies-templates to the contents of the referenced file
 	-->
-	<xsl:template match="js:reference">
+	<xsl:template match="js:schemaReference">
 		<xsl:apply-templates select="document(@ref)/js:schema"/>
 	</xsl:template>
 
 
-	<!-- UTIL FUNCTIONS -->
+	<!--======================== UTIL FUNCTIONS =======================-->
 
 	<!-- 
         given a list of stuff, calls applyTemplates on each thing
