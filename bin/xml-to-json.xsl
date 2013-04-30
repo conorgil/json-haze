@@ -10,7 +10,7 @@
 		<xsl:call-template name="startObject"/>
 		<!-- specifically does not include js:schema/@* -->
 		<xsl:call-template name="printListOfStuff">
-			<xsl:with-param name="listOfStuff" select="js:*"/>
+			<xsl:with-param name="listOfStuff" select="@required | @title | js:*"/>
 		</xsl:call-template>
 		<xsl:call-template name="endObject"/>
 	</xsl:template>
