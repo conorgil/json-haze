@@ -50,11 +50,17 @@
 	<xs:element name="schemaReference">
 		<xs:annotation>
 			<xs:documentation>
-				Allows you to reference another file containing a &lt;schema&gt;
+				Allows you to reference another &lt;schema&gt;
 			</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="ref" use="required" type="xs:anyURI"/>
+			<xs:attribute name="file" use="required" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						The relative path to a file containing a &lt;schema&gt; definition
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 

@@ -115,8 +115,8 @@
 	<!--
 		applies-templates to the contents of the referenced file
 	-->
-	<xsl:template match="js:schemaReference">
-		<xsl:apply-templates select="document(@ref)/js:schema"/>
+	<xsl:template match="js:schemaReference[@file]">
+		<xsl:apply-templates select="document(@file)/js:schema"/>
 	</xsl:template>
 
 

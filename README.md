@@ -113,7 +113,7 @@ to help developers understand how the element functions in a JSON schema.
 You can reference a `<schema>` defined in another file by using 
 ```javascript
 {
-  <schemaReference ref="relative/path/to/file"/>
+  <schemaReference file="relative/path/to/file"/>
 }
 ```
 

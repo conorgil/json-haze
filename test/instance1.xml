@@ -16,7 +16,7 @@
 				</schema>
 			</property>
 			<property name="testReference">
-					<schemaReference ref="./testFragment.xml"/>
+					<schemaReference file="./testFragment.xml"/>
 			</property>
 		</properties>
 		<additionalProperties>
