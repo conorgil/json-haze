@@ -15,6 +15,11 @@
 		<xsl:call-template name="endObject"/>
 	</xsl:template>
 
+	<xsl:template match="@required">
+		<xsl:value-of select="util:printPropertyName(name())"/>
+		<xsl:value-of select="."/>
+	</xsl:template>
+
 	<xsl:template match="js:property">
 		<xsl:value-of select="util:printPropertyName(@name)"/>
 		<xsl:call-template name="printAttrAndChildContent"/>
